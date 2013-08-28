@@ -5,7 +5,7 @@
 # mempo-why: Program FMS was unusably broken
 # mempo-bugfix-deb: http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=671477
 
-echo "Please run as ROOT (if needed): apt-get build-dep poco"
+echo "Please run as ROOT (if needed): apt-get build-dep poco devscripts"
 
 rm -rf build ; mkdir -p build ; cd build
 
