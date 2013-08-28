@@ -5,7 +5,7 @@
 # mempo-why: Program FMS was unusably broken
 # mempo-bugfix-deb: http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=671477
 
-echo "Please run as ROOT (if needed): apt-get build-dep poco devscripts"
+echo "Please run as ROOT (if needed): apt-get build-dep poco devscripts faketime"
 
 rm -rf build ; mkdir -p build ; cd build
 
@@ -14,5 +14,5 @@ apt-get source poco
 cd poco-1.3.6p1
 patch -p 0 < ../../libpcre-8.13.patch
 
-debuild -us -uc -B -j2
 
+faketime 2013-08-28 16:20:26 debuild -us -uc -B -j2
