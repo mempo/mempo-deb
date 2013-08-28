@@ -1,0 +1,46 @@
+
+mempo-title: string
+Short text description. Do not put here debian bug number, as it has own field
+Example: Fixed poco library against the lib pcre related bug
+
+
+mempo-prio: enum
+Priority level
+Example: 2
+Possible levels:
+
+0  - grave bug of System or Indispensable, rendering box bricked
+0s - grave bug for System or Indispensable, in SECURITY, that renders box untrusted
+
+1  - grave bug of System or Indispensable, rendering box not usable but easy repair is possible
+1s - grave bug for System or Indispensable, in SECURITY, but that does not make box permanently untrusted
+
+2  - grave bug of System or Indispensable, that make parts of box hard to use, in important uses
+2s - bug for Recommended, that removes security or removes privacy
+
+3  - bug of System or Indispensable, that make them work incorrect in common or typical uses
+3s - bug for Recommended, that lowers privacy, or any bug that removes security
+
+4  - bug of Recommended, that make them work incorrect in common or typical uses
+4s - any bug that removes security or lowers privacy
+
+5  - lesser bug of any of Recommended software, or bug in other software
+5s - bug that can only potentially lower security or privacy
+
+6 - lesser bug in other software
+
+7 - trivial update
+
+
+mempo-why: string
+Short information why this is released, e.g. what bug it fixes
+Example: Program FMS was unusably broken
+
+
+mempo-bugfix-deb: int|url
+Debig bug number, as integer or as entire URL to bugreport
+URL must be in this format only: http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=...
+Example: http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=671477
+Example: 671477
+
+
