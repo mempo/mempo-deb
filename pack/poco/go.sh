@@ -28,4 +28,4 @@ done
 cd out/usr/lib/
 echo "Checking sha512sum of builded libs"
 sha512sum *.so
-
+echo "Builded packages are in: /tmp/tmpbuild/build. After checksum verification install with dpkg -i *.deb"
