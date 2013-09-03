@@ -7,7 +7,8 @@
 
 echo "Please run as ROOT (if needed): apt-get build-dep poco; apt-get install devscripts faketime"
 
-rm -rf mkdir /tmp/tmpbuild; mkdir -p /tmp/tmpbuild; chmod 700 /tmp/tmpbuild; cp libpcre-8.13.patch /tmp/tmpbuild; cd /tmp/tmpbuild
+
+rm -rf mkdir /tmp/tmpbuild; mkdir -p /tmp/tmpbuild; chmod 700 /tmp/tmpbuild; cp libpcre-8.13.patch checksums /tmp/tmpbuild; cd /tmp/tmpbuild
 
 rm -rf build ; mkdir -p build ; cd build
 
@@ -25,7 +26,9 @@ do
   dpkg-deb -x $f out
 done
 
-cd out/usr/lib/
 echo "Checking sha512sum of builded libs"
-sha512sum *.so
+sha512sum out/usr/lib/*.so > checksums-to-verify
+
+echo "Differences:"
+diff checksums-to-verify ../checksums 
 echo "Builded packages are in: /tmp/tmpbuild/build. After checksum verification install with dpkg -i *.deb"
