@@ -1,36 +1,71 @@
-#!/bin/bash -e
+#!/bin/bash 
 
+# <mempo>
 # mempo-title: Fixed poco library against the lib pcre related bug
 # mempo-prio: 2
-# mempo-why: Program FMS was unusably broken
+# mempo-why: Program FMS was not working (hang/slowdown - sometimes)
 # mempo-bugfix-deb: http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=671477
+# </mempo>
 
-echo "Please run as ROOT (if needed): apt-get build-dep poco; apt-get install devscripts faketime"
+# work in progress - XXX marks debug code
 
+# TODO isolate this script into a common build-with-patch script
+# TODO privacy: set commont timezone e.g. UTC and locale (just to be sure)
+
+# http://mywiki.wooledge.org/BashFAQ/105/ ; http://mywiki.wooledge.org/BashFAQ/101
+
+set -e 
+
+# warn: Print a message to stderr. Usage: warn "format" ["arguments"...]
+warn() {
+  local fmt="$1" ; shift ; printf "ERROR: $fmt\n" "$@" >&2
+}
+# Usage: some_command || die [status code] "message" ["arguments"...]
+die() {
+  local st="$?" ; if [[ "$1" != *[^0-9]* ]] ; then st="$1" ; shift ; fi
+  warn "$@" ; exit "$st"
+}
+
+base_dir="$(pwd)" ; [ -z "$base_dir" ] && die "Could not get pwd ($base_dir)" # basic pwd (where our files are)
+# echo "Our base_dir is $base_dir [PRIVACY]"  # do not print this because it shows user data
+
+echo ; echo "Please run as ROOT (if needed): apt-get build-dep poco; apt-get install devscripts faketime" ; echo
 
 #/tmp/tmpbuild
-#/tmp/make1234
-#12345678
+dir_template="/tmp/build-XXXXXX"
+build_dir="$(mktemp -d "$dir_template" )" # dir to build in
+if [ -z "$build_dir" ] ; then die "Problem creating temporary directory ($build_dir) from template ($dir_template)"; fi
+echo "Building in $build_dir"
 
-dir_template="/tmp/makeXXXX"
-dir="$(mktemp -d "$dir_template" )"
-if [ -z "$dir" ] ; then echo "Problem creating temporary directory ($dir) from template ($dir_template)"; exit 1; fi
-echo $dir
+rm -r "$build_dir"  || die "Can't delete build_dir ($build_dir)"
+mkdir -p "$build_dir" || die "Creating build_dir ($build_dir)" 
+chmod 700 "$build_dir" || die "While chmod build_dir ($build_dir)" # create build dir
+
+# copy files to build dir
+cp libpcre-8.13.patch "$build_dir" 
+cp checksums "$build_dir" 
 
 
-rm -rf "$dir"
-mkdir -p "$dir" ; chmod 700 "$dir";
-cp libpcre-8.13.patch checksums "$dir"
-cd "$dir" # <---------
+# ===================================================================
+# --- operations inside build dir
+function execute_in_build_dir() {
+cd "$build_dir" || die "Can not enter the build_dir ($build_dir)" # <---------
 
-rm -rf build ; mkdir -p build ; cd build
+rm -rf build ; mkdir -p build ; cd build # recreate build directory
 
-apt-get source poco
+apt-get source poco || die "Can not download the sources" # <--- download 
 
 cd poco-1.3.6p1
-patch -p 0 < ../../libpcre-8.13.patch
-faketime "2013-08-28 16:20:26" debuild -us -uc -B -j2
+patch -p 0 < "$base_dir/libpcre-8.13.patch"
 
+tmp1="$(mktemp "/tmp/build-data-XXXXXX")" || die "temp file"
+[ ! -w "$tmp1" ] && die "use temp ($tmp1)"
+cat "$base_dir/changelog" debian/changelog > "$tmp1" || die "Writting debian/rules"
+mv "$tmp1" debian/changelog || die "Moving updated debian/rules"
+
+faketime "2013-08-28 16:20:26" debuild -us -uc -B -j2 || die "Failed to build"
+
+if true ; then # XXX
 cd ..
 FILES=*.deb
 for f in $FILES
@@ -38,18 +73,21 @@ do
   echo "Extracting $f..."
   dpkg-deb -x $f out
 done
-
 echo "Checking sha512sum of builded libs"
 sha512sum out/usr/lib/*.so > checksums-local
+cp -ar "$build_dir" "$build_dir-permanent" # XXX
 cp checksums-local /tmp/ # XXX
-
-echo "TESTBASH:" # XXX
-bash
+fi
 
 
 echo "Differences:"
 diff -Nuar checksums-to-verify ../checksums 
 
-sha256deep -r "{$dir}/build/"
+echo "Builded packages are in: {$build_dir}/build. After checksum verification install with dpkg -i *.deb"
 
-echo "Builded packages are in: {$dir}/build. After checksum verification install with dpkg -i *.deb"
+}
+# inside build dir
+# ===================================================================
+
+execute_in_build_dir
+
