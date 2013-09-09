@@ -1,0 +1,5 @@
+poco (1.3.6p1-4+mempo1) UNRELEASED; urgency=low
+
+  * Fixing bug #671477 http://sourceforge.net/p/poco/bugs/520
+
+ -- mempo <mempo@mempo.org>  Mon, 09 Sep 2013 09:47:29 +0200
