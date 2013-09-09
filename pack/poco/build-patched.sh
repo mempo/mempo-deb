@@ -43,7 +43,7 @@ chmod 700 "$build_dir" || die "While chmod build_dir ($build_dir)" # create buil
 
 # copy files to build dir
 cp libpcre-8.13.patch "$build_dir" 
-cp checksums "$build_dir" 
+cp checksums_expected "$build_dir" 
 
 
 # ===================================================================
@@ -71,17 +71,17 @@ FILES=*.deb
 for f in $FILES
 do
   echo "Extracting $f..."
-  dpkg-deb -x $f out
+  dpkg-deb -x $f out/
 done
 echo "Checking sha512sum of builded libs"
-sha512sum out/usr/lib/*.so > checksums-local
+sha512sum out/usr/lib/*.so > checksums_local
 cp -ar "$build_dir" "$build_dir-permanent" # XXX
 cp checksums-local /tmp/ # XXX
 fi
 
 
 echo "Differences:"
-diff -Nuar checksums-to-verify ../checksums 
+diff -Nuar checksums_expected checksums_local
 
 echo "Builded packages are in: {$build_dir}/build. After checksum verification install with dpkg -i *.deb"
 
