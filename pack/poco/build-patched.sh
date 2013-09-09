@@ -76,7 +76,7 @@ done
 echo "Checking sha512sum of builded libs"
 sha512sum out/usr/lib/*.so > checksums_local
 cp -ar "$build_dir" "$build_dir-permanent" # XXX
-cp checksums-local /tmp/ # XXX
+cp checksums_local /tmp/ # XXX
 fi
 
 
