@@ -32,12 +32,13 @@ base_dir="$(pwd)" ; [ -z "$base_dir" ] && die "Could not get pwd ($base_dir)" # 
 echo ; echo "Please run as ROOT (if needed): apt-get build-dep poco; apt-get install devscripts faketime" ; echo
 
 #/tmp/tmpbuild
-dir_template="/tmp/build-XXXXXX"
-build_dir="$(mktemp -d "$dir_template" )" # dir to build in
+#dir_template="/tmp/build-XXXXXX"
+#build_dir="$(mktemp -d "$dir_template" )" # dir to build in
+build_dir=/tmp/build-ZZZZZZ
 if [ -z "$build_dir" ] ; then die "Problem creating temporary directory ($build_dir) from template ($dir_template)"; fi
 echo "Building in $build_dir"
 
-rm -r "$build_dir"  || die "Can't delete build_dir ($build_dir)"
+rm -rf "$build_dir" || die "Can't delete build_dir ($build_dir)"
 mkdir -p "$build_dir" || die "Creating build_dir ($build_dir)" 
 chmod 700 "$build_dir" || die "While chmod build_dir ($build_dir)" # create build dir
 
@@ -81,7 +82,7 @@ fi
 
 
 echo "Differences:"
-diff -Nuar checksums_expected checksums_local
+diff -Nuar ../checksums_expected checksums_local
 
 echo "Builded packages are in: {$build_dir}/build. After checksum verification install with dpkg -i *.deb"
 
