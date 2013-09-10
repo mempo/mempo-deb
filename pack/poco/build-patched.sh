@@ -80,15 +80,18 @@ cp -ar "$build_dir" "$build_dir-permanent" # XXX
 cp checksums_local /tmp/ # XXX
 fi
 
-
 echo "Differences:"
-diff -Nuar ../checksums_expected checksums_local
-
-echo "Builded packages are in: {$build_dir}/build. After checksum verification install with dpkg -i *.deb"
+DIFFER=$(diff -Nuar ../checksums_expected checksums_local)
+if [ -z "$DIFFER" ]; then
+    echo -e "\e[42mNO DIFFERENCES, ALL OK\e[0m"
+else
+    echo -e "\e[41mWARNING! CHECKSUMS ARE DIFFERENT\e[0m"
+    echo "$DIFFER"      
+fi
+echo "Builded packages are in: $build_dir/build. After checksum verification install with dpkg -i *.deb"
 
 }
 # inside build dir
 # ===================================================================
 
 execute_in_build_dir
-
