@@ -1,0 +1,11 @@
+--- gnupg-1.4.12/g10/keygen.c	2012-01-20 11:51:15.000000000 +0100
++++ gnupg-1.4.12-longkeygen/g10/keygen.c	2013-12-12 15:09:24.888155981 +0100
+@@ -1577,7 +1577,7 @@
+ static unsigned int
+ ask_keysize (int algo, unsigned int primary_keysize)
+ {
+-  unsigned nbits, min, def=2048, max=4096;
++  unsigned nbits, min, def=2048, max=16384;
+   int for_subkey = !!primary_keysize;
+   int autocomp = 0;
+ 
