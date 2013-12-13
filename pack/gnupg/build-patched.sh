@@ -46,7 +46,6 @@ chmod 700 "$build_dir" || die "While chmod build_dir ($build_dir)" # create buil
 cp genlongkey.patch "$build_dir" 
 cp checksums_expected "$build_dir"
 
-
 # ===================================================================
 # --- operations inside build dir
 function execute_in_build_dir() {
@@ -54,7 +53,20 @@ cd "$build_dir" || die "Can not enter the build_dir ($build_dir)" # <---------
 
 rm -rf build ; mkdir -p build ; cd build # recreate build directory
 
-apt-get source gnupg || die "Can not download the sources" # <--- download 
+if [[ $1 == "offline" ]]
+then
+  echo "Building in OFFLINE mode, using provided sources"
+  cp $base_dir/src/* . # XXX
+  sha512sum *.gz
+  sha512sum *.dsc
+  echo "Does above checksums of the SOURCE file look correct? Press Ctrl-C to cancel or ENTER to conitnue"
+  read _
+  dpkg-source -x *.dsc
+else
+  echo "Downloading sources using apt-get source"
+  apt-get source gnupg || die "Can not download the sources" # <--- download 
+fi
+
 
 #cd patch -p0 < genlongkey.patch
 patch -p 0 < "$base_dir/genlongkey.patch"
@@ -94,4 +106,4 @@ echo "Builded packages are in: $build_dir/build. After checksum verification ins
 # inside build dir
 # ===================================================================
 
-execute_in_build_dir
+execute_in_build_dir $1
