@@ -75,7 +75,7 @@ do
   dpkg-deb -x $f out/
 done
 echo "Checking sha512sum of builded libs"
-sha512sum out/usr/lib/*.so > checksums_local
+sha256deep -r -l  out | sort > checksums_local
 cp -ar "$build_dir" "$build_dir-permanent" # XXX
 cp checksums_local /tmp/ # XXX
 fi
