@@ -1,0 +1,8 @@
+
+mempo-deb (0.1.3) UNRELEASED; urgency=low
+
+  * Change max key size in gpg-keygen
+	* Fixed libpoco
+
+ -- mempo <mempo@mempo.org>  Fri, 13 Dec 2013 13:00:00 +0200
+
