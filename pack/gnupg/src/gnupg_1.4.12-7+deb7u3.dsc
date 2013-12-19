@@ -5,7 +5,7 @@ Format: 3.0 (quilt)
 Source: gnupg
 Binary: gnupg, gnupg-curl, gpgv, gnupg-udeb, gpgv-udeb, gpgv-win32
 Architecture: any all
-Version: 1.4.12-7+deb7u2
+Version: 1.4.12-7+deb7u3
 Maintainer: Debian GnuPG-Maintainers <pkg-gnupg-maint@lists.alioth.debian.org>
 Uploaders: Sune Vuorela <debian@pusling.com>, Daniel Leidert <dleidert@debian.org>, Thijs Kinkhorst <thijs@debian.org>
 Homepage: http://www.gnupg.org
@@ -23,22 +23,22 @@ Package-List:
  gpgv-win32 deb utils extra
 Checksums-Sha1: 
  790587e440ec7d429b120db7a96a237badc638fd 4939171 gnupg_1.4.12.orig.tar.gz
- c4a7d7bfeaca07886da18caecc3ea47f4e473838 98415 gnupg_1.4.12-7+deb7u2.debian.tar.gz
+ 9615fafe7028150e658492d3880b85880108b055 102475 gnupg_1.4.12-7+deb7u3.debian.tar.gz
 Checksums-Sha256: 
  bb94222fa263e55a5096fdc1c6cd60e9992602ce5067bc453a4ada77bb31e367 4939171 gnupg_1.4.12.orig.tar.gz
- 7c300cbeee85144676f2858a8038e90c2a793f5cd95c01786c4221cd25961b18 98415 gnupg_1.4.12-7+deb7u2.debian.tar.gz
+ 3401092a87b51fd90aa5c75ee03a00246bee90e9ad5d02581eed3a78522d95c0 102475 gnupg_1.4.12-7+deb7u3.debian.tar.gz
 Files: 
  f9a65ccd7166d3fdb084454cf7427564 4939171 gnupg_1.4.12.orig.tar.gz
- 6283ca4c8c75c6091bb6a6c3af98ee14 98415 gnupg_1.4.12-7+deb7u2.debian.tar.gz
+ f17327365a21d208a7a40739ae56661b 102475 gnupg_1.4.12-7+deb7u3.debian.tar.gz
 
 -----BEGIN PGP SIGNATURE-----
-Version: GnuPG v1.4.15 (GNU/Linux)
+Version: GnuPG v1.4.12 (GNU/Linux)
 
-iQEcBAEBAgAGBQJSVX0xAAoJEFb2GnlAHawE5hoH/RoZk+2OEcs9//EWcbyUfi8o
-Y/YtkJJSN3W7JiXdHxfbsuWKqTw8tbC931UwQhQ55gv4uOk4K+t5NxRPOzAsQ/mU
-xOa3BOB+UzyB/qyVNQLM/rbwot59lZx7GRwqYWhKmneMmqD7gsCRCX6GfmTG5g+h
-2xsqEA+5WJdOm/8vXdXgeAWZ8owfqcFOuWhPs+nMlmYdnvfUfZ7cJscEXW7Zkh5J
-jF9KHM0sQZXEfW3LlPpNrNZBmeduTJsznzU0TvNAqhL6yLqm40fiNgE5UX2T2VdR
-F3xUhF+pwvAh34JnwZXTj6TWQ7qpD/e+hZhl8bCZeOYtrjQiF4iWdaDQ/Siqr2M=
-=2ZrM
+iQEcBAEBAgAGBQJSrBbxAAoJEFb2GnlAHawERJcH/jL3/Gk0pPWIST1JxQLr/hJH
+WCjj1Dr5Pg72R5hNpVq8mcLdogmpnlyuVXLthXp7LKwxWE2kfkPPHRI93iePbcq7
+bRZumr9QGOYCkMiAQbWc9RKlDsA/IyFcflaCfoevNdF8tTI6i0u+Ue6J6tu4NBAP
+dgCiBHudTTZTJj0MxO3FJoKFTomCfx4Vo8I3IirnGkkW2yUZ/Rx7EphwIzEivmq5
+cwbBhee95aYFPCroEMJd7cRQolzfowJvbHGcqMXxFoTCstO4DpX3X8sNkQ3kIYZx
+sWN8m1KZMJW2fQbBqogXsqfxEqNc1N88B+8bc9j80koY6pwGyW7RxJ9TiGZ7dRE=
+=Osu8
 -----END PGP SIGNATURE-----
