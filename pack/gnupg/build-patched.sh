@@ -1,10 +1,10 @@
-#!/bin/bash 
+#!/bin/bash
 
 # <mempo>
 # mempo-title: Change max key size in gpg-keygen
 # mempo-prio: 2
 # mempo-why: To improve pgp keys security
-# mempo-bugfix-deb: 
+# mempo-bugfix-deb:
 # </mempo>
 
 # work in progress - XXX marks debug code
@@ -14,7 +14,7 @@
 
 # http://mywiki.wooledge.org/BashFAQ/105/ ; http://mywiki.wooledge.org/BashFAQ/101
 
-set -e 
+set -e
 
 # warn: Print a message to stderr. Usage: warn "format" ["arguments"...]
 warn() {
@@ -25,6 +25,37 @@ die() {
   local st="$?" ; if [[ "$1" != *[^0-9]* ]] ; then st="$1" ; shift ; fi
   warn "$@" ; exit "$st"
 }
+
+echo "Tools: checking prerequisites..."
+DPKG_VER=$(dpkg-query -W --showformat='${Version}\n' dpkg)
+DPKG_VER_NEEDED="1.17.5"
+
+function show_dpkg_why {
+        echo "We need dpkg version that packs files in same way, see http://tinyurl.com/pcrrvag and https://wiki.debian.org/ReproducibleBuildsKernel"
+}
+
+function show_mempo_contact {
+        echo "~~ Problems, questions, suggestions or will to help us? ~~ Contact Mempo at IRC"
+        echo "IRC channel #mempo on irc.oftc.net (tor allowed), irc2p (i2p2.de then localhost 6668) or irc.freenode.org."
+        echo "We will gladly help fellow Hackers and security researchers."
+}
+
+echo " * Dpkg version is $DPKG_VER (version >= $DPKG_VER_NEEDED is recommended)"
+
+. dpkg-vercomp.sh
+vercomp $DPKG_VER $DPKG_VER_NEEDED
+case $? in
+        2)
+        echo "Wrong DPKG version..." ;
+        echo "If you want to force and try despite this problem, edit this script that shows this error."
+        show_dpkg_why
+        show_mempo_contact
+        echo
+        echo "On Debian (wheezy) the SOLUTION is to install dpkg in version from jessy (download sources, build only this one package, install it), search for more info on our Wiki."
+        echo
+        exit 1
+        ;;
+esac
 
 base_dir="$(pwd)" ; [ -z "$base_dir" ] && die "Could not get pwd ($base_dir)" # basic pwd (where our files are)
 # echo "Our base_dir is $base_dir [PRIVACY]"  # do not print this because it shows user data
@@ -39,11 +70,11 @@ if [ -z "$build_dir" ] ; then die "Problem creating temporary directory ($build_
 echo "Building in $build_dir"
 
 rm -rf "$build_dir" || die "Can't delete build_dir ($build_dir)"
-mkdir -p "$build_dir" || die "Creating build_dir ($build_dir)" 
+mkdir -p "$build_dir" || die "Creating build_dir ($build_dir)"
 chmod 700 "$build_dir" || die "While chmod build_dir ($build_dir)" # create build dir
 
 # copy files to build dir
-cp genlongkey.patch "$build_dir" 
+cp genlongkey.patch "$build_dir"
 cp checksums_expected "$build_dir"
 
 # ===================================================================
@@ -64,7 +95,7 @@ then
   dpkg-source -x *.dsc
 else
   echo "Downloading sources using apt-get source"
-  apt-get source gnupg || die "Can not download the sources" # <--- download 
+  apt-get source gnupg || die "Can not download the sources" # <--- download
 fi
 
 
@@ -76,21 +107,12 @@ tmp1="$(mktemp "/tmp/build-data-XXXXXX")" || die "temp file"
 cat "$base_dir/changelog" debian/changelog > "$tmp1" || die "Writting debian/rules"
 mv "$tmp1" debian/changelog || die "Moving updated debian/rules"
 
-faketime "2013-08-28 16:20:26" debuild -us -uc -B || die "Failed to build"
+DEB_BUILD_TIMESTAMP="2013-08-28 16:20:26"
 
-if true ; then # XXX
+faketime "2013-08-28 16:20:26" dpkg-buildpackage -us -uc -B || die "Failed to build"
+
 cd ..
-FILES=*.deb
-for f in $FILES
-do
-  echo "Extracting $f..."
-  dpkg-deb -x $f out/
-done
-echo "Checking sha512sum of builded libs"
-sha256deep -r -l  out | sort > checksums_local
-cp -ar "$build_dir" "$build_dir-permanent" # XXX
-cp checksums_local /tmp/ # XXX
-fi
+sha512sum *.deb > checksums_local
 
 echo "Differences:"
 DIFFER=$(diff -Nuar ../checksums_expected checksums_local)
@@ -98,7 +120,7 @@ if [ -z "$DIFFER" ]; then
     echo -e "\e[42mNO DIFFERENCES, ALL OK\e[0m"
 else
     echo -e "\e[41mWARNING! CHECKSUMS ARE DIFFERENT\e[0m"
-    echo "$DIFFER"      
+    echo "$DIFFER"
 fi
 echo "Builded packages are in: $build_dir/build. After checksum verification install with dpkg -i *.deb"
 
