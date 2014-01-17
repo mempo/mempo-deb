@@ -64,7 +64,7 @@ cd "$build_dir" || die "Can't enter the build_dir ($build_dir)" # <---------
 
 rm -rf build ; mkdir -p build ; cd build # recreate build directory
 
-git clone https://github.com/vyrly/copy-dpkg.git ; 
+git clone https://github.com/mempo/copy-dpkg.git;
 cd copy-dpkg/original || die "Can't enter the copy-dpkg/original dir"
 
 gitver="$(git show-ref --hash --heads)" || die "Can't take repository reference number!"
