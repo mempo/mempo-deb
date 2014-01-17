@@ -1,0 +1,4 @@
+#!/bin/bash
+echo "Using ar deterministic wrapper"
+read a
+ar -D "$@"

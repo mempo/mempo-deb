@@ -1,0 +1,161 @@
+diff -Nuar a/dpkg-deb/build.c b/dpkg-deb/build.c
+--- a/dpkg-deb/build.c	2014-01-16 16:31:14.371919568 +0100
++++ b/dpkg-deb/build.c	2014-01-16 16:52:32.608067460 +0100
+@@ -38,6 +38,7 @@
+ #include <stdint.h>
+ #include <stdlib.h>
+ #include <stdio.h>
++#include <time.h>
+ 
+ #include <dpkg/i18n.h>
+ #include <dpkg/dpkg.h>
+@@ -432,6 +433,24 @@
+   return path;
+ }
+ 
++static time_t
++get_build_timestamp(void)
++{
++  time_t timestamp;
++  const char *value;
++  char *end;
++
++  errno = 0;
++  value = getenv("DEB_BUILD_TIMESTAMP");
++  if (!value)
++    return time(NULL);
++
++  timestamp = strtol(value, &end, 10);
++  if ( (end == NULL) || (value == end) || (*end) || (errno != 0) )
++    ohshite(_("unable to parse timestamp `%.255s'"), value);
++  return timestamp;
++}
++
+ /**
+  * Overly complex function that builds a .deb file.
+  */
+@@ -441,11 +460,14 @@
+   struct dpkg_error err;
+   const char *debar, *dir;
+   bool subdir;
++  time_t build_timestamp;
+   char *tfbuf;
+   int arfd;
+   int p1[2], p2[2], gzfd;
+   pid_t c1, c2;
+ 
++	build_timestamp = get_build_timestamp();
++	
+   /* Decode our arguments. */
+   dir = *argv++;
+   if (!dir)
+@@ -560,8 +582,8 @@
+     const char deb_magic[] = ARCHIVEVERSION "\n";
+ 
+     dpkg_ar_put_magic(debar, arfd);
+-    dpkg_ar_member_put_mem(debar, arfd, DEBMAGIC, deb_magic, strlen(deb_magic));
+-    dpkg_ar_member_put_file(debar, arfd, ADMINMEMBER, gzfd, -1);
++    dpkg_ar_member_put_mem(debar, arfd, DEBMAGIC, deb_magic, build_timestamp, strlen(deb_magic));
++    dpkg_ar_member_put_file(debar, arfd, ADMINMEMBER, gzfd, build_timestamp, -1);
+   } else {
+     internerr("unknown deb format version %d.%d", deb_format.major, deb_format.minor);
+   }
+@@ -630,7 +652,7 @@
+     if (lseek(gzfd, 0, SEEK_SET))
+       ohshite(_("failed to rewind temporary file (%s)"), _("data member"));
+ 
+-    dpkg_ar_member_put_file(debar, arfd, datamember, gzfd, -1);
++    dpkg_ar_member_put_file(debar, arfd, datamember, gzfd, build_timestamp, -1);
+ 
+     close(gzfd);
+   }
+diff -Nuar a/dpkg-split/split.c b/dpkg-split/split.c
+--- a/dpkg-split/split.c	2014-01-16 16:31:14.219842831 +0100
++++ b/dpkg-split/split.c	2014-01-16 15:12:06.000000000 +0100
+@@ -215,13 +215,13 @@
+ 		              (intmax_t)st.st_size, (intmax_t)partsize,
+ 		              curpart, nparts, arch);
+ 		dpkg_ar_member_put_mem(file_dst.buf, fd_dst, PARTMAGIC,
+-		                       partmagic.buf, partmagic.used);
++		                       partmagic.buf, time(NULL), partmagic.used);
+ 		varbuf_reset(&partmagic);
+ 
+ 		/* Write the data part. */
+ 		varbuf_printf(&partname, "data.%d", curpart);
+ 		dpkg_ar_member_put_file(file_dst.buf, fd_dst, partname.buf,
+-		                        fd_src, cur_partsize);
++		                        fd_src, time(NULL), cur_partsize);
+ 		varbuf_reset(&partname);
+ 
+ 		close(fd_dst);
+diff -Nuar a/lib/dpkg/ar.c b/lib/dpkg/ar.c
+--- a/lib/dpkg/ar.c	2014-01-16 16:31:14.303885217 +0100
++++ b/lib/dpkg/ar.c	2014-01-16 14:15:36.000000000 +0100
+@@ -89,7 +89,7 @@
+ 
+ void
+ dpkg_ar_member_put_header(const char *ar_name, int ar_fd,
+-                          const char *name, off_t size)
++                          const char *name, time_t timestamp, off_t size)
+ {
+ 	char header[sizeof(struct ar_hdr) + 1];
+ 	int n;
+@@ -100,7 +100,7 @@
+ 		ohshit(_("ar member size %jd too large"), size);
+ 
+ 	n = sprintf(header, "%-16s%-12lu0     0     100644  %-10jd`\n",
+-	            name, time(NULL), (intmax_t)size);
++	            name, timestamp, (intmax_t)size);
+ 	if (n != sizeof(struct ar_hdr))
+ 		ohshit(_("generated corrupt ar header for '%s'"), ar_name);
+ 
+@@ -110,10 +110,9 @@
+ 
+ void
+ dpkg_ar_member_put_mem(const char *ar_name, int ar_fd,
+-                       const char *name, const void *data, size_t size)
++                       const char *name, const void *data, time_t timestamp, size_t size)
+ {
+-	dpkg_ar_member_put_header(ar_name, ar_fd, name, size);
+-
++	dpkg_ar_member_put_header(ar_name, ar_fd, name, timestamp, size);
+ 	/* Copy data contents. */
+ 	if (fd_write(ar_fd, data, size) < 0)
+ 		ohshite(_("unable to write file '%s'"), ar_name);
+@@ -125,7 +124,7 @@
+ 
+ void
+ dpkg_ar_member_put_file(const char *ar_name, int ar_fd,
+-                        const char *name, int fd, off_t size)
++                        const char *name, int fd, time_t timestamp, off_t size)
+ {
+ 	struct dpkg_error err;
+ 
+@@ -137,8 +136,7 @@
+ 		size = st.st_size;
+ 	}
+ 
+-	dpkg_ar_member_put_header(ar_name, ar_fd, name, size);
+-
++	dpkg_ar_member_put_header(ar_name, ar_fd, name, timestamp, size);
+ 	/* Copy data contents. */
+ 	if (fd_fd_copy(fd, ar_fd, size, &err) < 0)
+ 		ohshit(_("cannot append ar member file (%s) to '%s': %s"),
+diff -Nuar a/lib/dpkg/ar.h b/lib/dpkg/ar.h
+--- a/lib/dpkg/ar.h	2014-01-16 16:31:14.307887260 +0100
++++ b/lib/dpkg/ar.h	2014-01-16 14:09:27.000000000 +0100
+@@ -43,11 +43,11 @@
+ 
+ void dpkg_ar_put_magic(const char *ar_name, int ar_fd);
+ void dpkg_ar_member_put_header(const char *ar_name, int ar_fd,
+-                               const char *name, off_t size);
++                               const char *name, time_t timestamp, off_t size);
+ void dpkg_ar_member_put_file(const char *ar_name, int ar_fd, const char *name,
+-                             int fd, off_t size);
++                             int fd, time_t timestamp, off_t size);
+ void dpkg_ar_member_put_mem(const char *ar_name, int ar_fd, const char *name,
+-                            const void *data, size_t size);
++                            const void *data, time_t timestamp, size_t size);
+ off_t dpkg_ar_member_get_size(const char *ar_name, struct ar_hdr *arh);
+ 
+ /** @} */
