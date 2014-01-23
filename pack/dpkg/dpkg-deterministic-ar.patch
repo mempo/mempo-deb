@@ -1,3 +1,5 @@
+Patch based on pu/reproducible_builds branch of dpkg: http://anonscm.debian.org/gitweb/?p=reproducible/dpkg.git;a=shortlog;h=refs/heads/pu/reproducible_builds 
+---
 diff -Nuar a/dpkg-deb/build.c b/dpkg-deb/build.c
 --- a/dpkg-deb/build.c	2014-01-16 16:31:14.371919568 +0100
 +++ b/dpkg-deb/build.c	2014-01-16 16:52:32.608067460 +0100

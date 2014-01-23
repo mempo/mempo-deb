@@ -64,7 +64,7 @@ tmp1="$(mktemp "/tmp/build-data-XXXXXX")" || die "temp file"
 cat "$base_dir/changelog" debian/changelog > "$tmp1" || die "Writting debian/rules"
 mv "$tmp1" debian/changelog || die "Moving updated debian/rules"
 
-faketime "2013-08-28 16:20:26" debuild -us -uc -B -j2 || die "Failed to build"
+faketime "2013-08-28 16:20:26" dpkg-buildpackage -us -uc -B -j2 || die "Failed to build"
 
 if true ; then # XXX
 cd ..
