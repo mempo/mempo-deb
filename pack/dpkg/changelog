@@ -1,5 +1,0 @@
-dpkg (1.17.5+mempo1.0) UNRELEASED; urgency=low
-
-  * Change ar to take fake timestamp for reproducible builds 
-
- -- mempo <mempo@mempo.org>  Fri, 17 Jan 2014 11:20:41 +0200
