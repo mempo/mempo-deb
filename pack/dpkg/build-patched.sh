@@ -35,13 +35,13 @@ echo "Because we need GNU gettext >= 0.18.2, please add \"http://YOURMIRROR.debi
 echo " # aptitude update"
 echo " # aptitude install -t wheezy-backports gettext autopoint"
 
-git clone https://alioth.debian.org/anonscm/git/dpkg/dpkg.git || die "Can't clone dpkg repository"
+rm -rf dpkg
+
+git clone https://alioth.debian.org/anonscm/git/reproducible/dpkg.git || die "Can't clone dpkg repository"
 cd dpkg
-git checkout 1e059955
-patch -p 1 < ../0001-Ensure-deterministic-file-order-in-data.tar.-files.patch 
-patch -p 1 < ../0002-Extract-the-creation-of-the-control-tarball-to-a-ded.patch 
-patch -p 1 < ../0003-Rename-create_control_tar-variables-to-more-meaningf.patch 
-patch -p 1 < ../0004-Also-write-control.tar.gz-in-deterministic-order.patch
+
+git checkout pu/reproducible_builds
+patch -p 0 < ../set-version-manually-because-no-tags.patch
 
 autoreconf -f -i
 ./configure --prefix=$HOME/.local
