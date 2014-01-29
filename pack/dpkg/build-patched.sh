@@ -35,7 +35,7 @@ echo "Because we need GNU gettext >= 0.18.2, please add \"http://YOURMIRROR.debi
 echo " # aptitude update"
 echo " # aptitude install -t wheezy-backports gettext autopoint"
 
-rm -rf dpkg
+rm -rf dpkg debhelper
 
 git clone https://alioth.debian.org/anonscm/git/reproducible/dpkg.git || die "Can't clone dpkg repository"
 cd dpkg
@@ -47,6 +47,12 @@ autoreconf -f -i
 ./configure --prefix=$HOME/.local
 make
 make install
+
+git clone https://alioth.debian.org/anonscm/git/reproducible/debhelper.git
+cd debhelper
+git checkout pu/reproducible_builds
+make
+make install DESTDIR=$HOME/.local
 
 #~#echo "Install ar-wrapper witch deterministic mode enabled"
 #~#mkdir -p ~/.local/usr/lib/
