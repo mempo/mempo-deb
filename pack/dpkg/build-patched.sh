@@ -35,7 +35,7 @@ echo "Because we need GNU gettext >= 0.18.2, please add \"http://YOURMIRROR.debi
 echo " # aptitude update"
 echo " # aptitude install -t wheezy-backports gettext autopoint"
 
-rm -rf dpkg debhelper
+rm -rf dpkg
 
 git clone https://alioth.debian.org/anonscm/git/reproducible/dpkg.git || die "Can't clone dpkg repository"
 cd dpkg
@@ -47,87 +47,3 @@ autoreconf -f -i
 ./configure --prefix=$HOME/.local
 make
 make install
-
-git clone https://alioth.debian.org/anonscm/git/reproducible/debhelper.git
-cd debhelper
-git checkout pu/reproducible_builds
-make
-make install DESTDIR=$HOME/.local
-
-#~#echo "Install ar-wrapper witch deterministic mode enabled"
-#~#mkdir -p ~/.local/usr/lib/
-#~#cp -r ar-wrapper/ ~/.local/usr/lib/
-#~
-#~#echo "Adding wrapper to PATH"
-#~#PATH="$HOME/.local/usr/lib/ar-wrapper/:$PATH"
-#~#echo "$PATH"
-#~
-#~#/tmp/tmpbuild
-#~#dir_template="/tmp/build-XXXXXX"
-#~#build_dir="$(mktemp -d "$dir_template" )" # dir to build in
-#~build_dir=/tmp/build-ZZZZZZ-dpkg
-#~if [ -z "$build_dir" ] ; then die "Problem creating temporary directory ($build_dir) from template ($dir_template)"; fi
-#~echo "Building in $build_dir"
-#~
-#~rm -rf "$build_dir" || die "Can't delete build_dir ($build_dir)"
-#~mkdir -p "$build_dir" || die "Creating build_dir ($build_dir)"
-#~chmod 700 "$build_dir" || die "While chmod build_dir ($build_dir)" # create build dir
-#~
-#~# copy files to build dir
-#~cp build-patched.sh "$build_dir"
-#~cp checksums_expected "$build_dir"
-#~
-#~# ===================================================================
-#~# --- operations inside build dir
-#~function execute_in_build_dir() {
-#~cd "$build_dir" || die "Can't enter the build_dir ($build_dir)" # <---------
-#~
-#~rm -rf build ; mkdir -p build ; cd build # recreate build directory
-#~
-#~git clone https://github.com/mempo/copy-dpkg.git;
-#~cd copy-dpkg/original || die "Can't enter the copy-dpkg/original dir"
-#~
-#~gitver="$(git show-ref --hash --heads)" || die "Can't take repository reference number!"
-#~
-#~if [[ "$gitver" == "6940ea7a489bf0997b6b5c8fc95c3b663183c2ce" ]] ; then 
-		#~echo "OK GIT VERSION: $gitver" 
-#~else
-		#~die "Github copy-dpkg repository reference doesn't match!" 
-#~fi 
-#~
-#~dpkg-source -x *.dsc
-#~
-#~cd dpkg-1.17.5
-#~patch -p 1 < "$base_dir/dpkg-deterministic-ar.patch"
-#~tmp1="$(mktemp "/tmp/build-data-XXXXXX")" || die "temp file"
-#~[ ! -w "$tmp1" ] && die "use temp ($tmp1)"
-#~cat "$base_dir/changelog" debian/changelog > "$tmp1" || die "Writing debian/rules"
-#~mv "$tmp1" debian/changelog || die "Moving updated debian/rules"
-#~
-#~#faketime "2013-08-28 16:20:26"
-#~#DEB_BUILD_TIMESTAMP="$FAKETIME_TIME" 
-#~faketime "2013-08-28 16:20:26" dpkg-buildpackage -us -uc -B || die "Failed to build"
-#~
-#~#TODO: make dpkg repository fully reproducible
-#~
-#~echo ; echo "VERIFICATION PROCESS"
-#~cd ..
-#~FILES=*.deb
-#~for f in $FILES
-#~do
-  #~echo "Extracting $f..."
-  #~dpkg-deb -x $f out/
-#~done
-#~echo "Checking sha512sum of builded libs"
-#~sha256deep -r -l -of out | sort > checksums_local
-#~
-#~echo "Differences (usr/lib/libdpkg.a don't build deterministically for now):"
-#~diff -Nuar ../../../checksums_expected checksums_local
-#~
-#~echo "Builded packages are in: $build_dir/build. After checksum verification install with dpkg -i *.deb"
-#~
-#~}
-#~
-#~# inside build dir
-#~# ===================================================================
-#~execute_in_build_dir $1
