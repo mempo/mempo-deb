@@ -29,16 +29,19 @@ die() {
 #~base_dir="$(pwd)" ; [ -z "$base_dir" ] && die "Could not get pwd ($base_dir)" # basic pwd (where our files are)
 # echo "Our base_dir is $base_dir [PRIVACY]"  # do not print this because it shows user data
 
-GETTEXT_VER=$(dpkg-query -W --showformat='${Version}\n' gettext)
-GETTEXT_VER_NEEDED="0.18.2"
-
-echo " * gettext version is $GETTEXT_VER, we need version >= $GETTEXT_VER_NEEDED"
-
 echo "This script will download, build and install locally ($HOME/.local) dpkg with Lunar's deterministic patches (http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=719845#54)" ; echo
 echo "Please run as ROOT (if needed): apt-get install git build-dep gnupg; apt-get install devscripts autoconf automake flex" ; echo
+echo "We need GNU gettext >= 0.18.2. Is this version of gettext correct [y/n]?"
+dpkg -s gettext | grep 'Version'
+
+read y
+
+if [[ $y != "y" ]] ; then
 echo "Because we need GNU gettext >= 0.18.2, please add \"http://YOURMIRROR.debian.org/debian wheezy-backports\" to /etc/apt/sources.list and run:"
 echo " # aptitude update"
 echo " # aptitude install -t wheezy-backports gettext autopoint"
+exit 1
+fi
 
 rm -rf dpkg
 
