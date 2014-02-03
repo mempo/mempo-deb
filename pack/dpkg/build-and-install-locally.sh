@@ -49,9 +49,21 @@ git clone https://alioth.debian.org/anonscm/git/reproducible/dpkg.git || die "Ca
 cd dpkg
 
 git checkout pu/reproducible_builds
+echo "Checking repository reference number"
+gitver="$(git show-ref --hash --heads)" || die "Can't take repository reference number!"
+
+if [[ "$gitver" == "9673d63303211fdefe650f2974d35d326929d0fd" ]] ; then
+echo "OK GIT VERSION: $gitver"
+else
+die "Github repository reference doesn't match!"
+fi 
+
 patch -p 0 < ../set-version-manually-because-no-tags.patch
 
 autoreconf -f -i
 ./configure --prefix=$HOME/.local
 make
 make install
+
+echo "======================================="
+echo "dpkg build and installed in $HOME/.local"
