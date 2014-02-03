@@ -31,17 +31,27 @@ die() {
 
 echo "This script will download, build and install locally ($HOME/.local) dpkg with Lunar's deterministic patches (http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=719845#54)" ; echo
 echo "Please run as ROOT (if needed): apt-get install git build-dep gnupg; apt-get install devscripts autoconf automake flex" ; echo
-echo "We need GNU gettext >= 0.18.2. Is this version of gettext correct [y/n]?"
-dpkg -s gettext | grep 'Version'
+echo ""
 
-read y
+gettext_ver=$( LC_ALL=C dpkg -s gettext | grep 'Version' | head -n 1 | sed -e "s/Version: \([^ ]*\).*/\1/" | cut -d'-' -f1 )
+echo " * gettext version=$gettext_ver"
 
-if [[ $y != "y" ]] ; then
-echo "Because we need GNU gettext >= 0.18.2, please add \"http://YOURMIRROR.debian.org/debian wheezy-backports\" to /etc/apt/sources.list and run:"
-echo " # aptitude update"
-echo " # aptitude install -t wheezy-backports gettext autopoint"
-exit 1
-fi
+. dpkg-vercomp.sh 
+
+ver_what='gettext'; ver_have=$gettext_ver ; ver_need="0.18.2"
+set +e ; vercomp $ver_have $ver_need ; err=$? ; set -e 
+case $err in
+  2) echo ; echo "ERROR: wrong version of $ver_what"
+                echo "We have $ver_have while we need $ver_need" ; 
+								echo "Because we need GNU gettext >= 0.18.2, please add \"http://YOURMIRROR.debian.org/debian wheezy-backports\" to /etc/apt/sources.list and run:"
+								echo "aptitude update"
+								echo "aptitude install -t wheezy-backports gettext autopoint"
+								echo "See http://wiki.debian.org/Mempo/ for help"
+                exit 1;
+        ;;
+esac
+echo "ok"
+echo " * Using $ver_what version $ver_have >= $ver_need - OK"
 
 rm -rf dpkg
 
