@@ -1,0 +1,30 @@
+diff -Nuar a/lib/dpkg/compress.c b/lib/dpkg/compress.c
+--- a/lib/dpkg/compress.c	2014-02-06 08:21:34.424608732 +0100
++++ b/lib/dpkg/compress.c	2014-02-06 08:25:18.900607962 +0100
+@@ -534,7 +534,7 @@
+ 	preset = io->params->level;
+ 	if (io->params->strategy == compressor_strategy_extreme)
+ 		preset |= LZMA_PRESET_EXTREME;
+-	ret = lzma_easy_encoder(s, preset, LZMA_CHECK_CRC32);
++	ret = lzma_easy_encoder(s, preset, LZMA_CHECK_SHA256);
+ 	if (ret != LZMA_OK)
+ 		filter_lzma_error(io, ret);
+ }
+@@ -595,7 +595,7 @@
+ static void
+ compress_xz(int fd_in, int fd_out, struct compress_params *params, const char *desc)
+ {
+-	char combuf[6];
++	char combuf[64];
+ 	const char *strategy;
+ 
+ 	if (params->strategy == compressor_strategy_extreme)
+@@ -603,7 +603,7 @@
+ 	else
+ 		strategy = NULL;
+ 
+-	snprintf(combuf, sizeof(combuf), "-c%d", params->level);
++	snprintf(combuf, sizeof(combuf), "-c%d --check=sha256", params->level);
+ 	fd_fd_filter(fd_in, fd_out, desc, env_xz, XZ, combuf, strategy, NULL);
+ }
+ #endif

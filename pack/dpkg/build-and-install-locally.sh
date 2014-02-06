@@ -70,7 +70,7 @@ die "Github repository reference doesn't match!"
 fi 
 
 patch -p 0 < ../set-version-manually-because-no-tags.patch
-patch -p 1 < ../force-crc64-in-xz-compressing.patch
+patch -p 1 < ../force-sha256-in-xz-compressing.patch
 
 autoreconf -f -i
 ./configure --prefix=$HOME/.local
