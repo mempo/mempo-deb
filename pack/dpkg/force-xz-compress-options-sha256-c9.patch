@@ -21,6 +21,7 @@ diff -Nuar a/lib/dpkg/compress.c b/lib/dpkg/compress.c
  {
 -	char combuf[6];
 +	char combuf[64];
++ const char *check = "--check=sha256";
  	const char *strategy;
  
  	if (params->strategy == compressor_strategy_extreme)
@@ -29,8 +30,8 @@ diff -Nuar a/lib/dpkg/compress.c b/lib/dpkg/compress.c
  		strategy = NULL;
  
 -	snprintf(combuf, sizeof(combuf), "-c%d", params->level);
-+	snprintf(combuf, sizeof(combuf), "-c9 --check=sha256");
- 	fd_fd_filter(fd_in, fd_out, desc, env_xz, XZ, combuf, strategy, NULL);
++	snprintf(combuf, sizeof(combuf), "-c9");
+ 	fd_fd_filter(fd_in, fd_out, desc, env_xz, XZ, combuf, strategy, check, NULL);
  }
  #endif
 @@ -611,7 +612,7 @@
