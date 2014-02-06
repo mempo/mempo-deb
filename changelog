@@ -4,6 +4,8 @@ mempo-deb (0.1.23+4) UNRELEASED; urgency=low
   * Fixed our dpkg (based on reproducible dpkg) to use sha256 for xz/liblzma
   * Switched version numbering to .5 instead +5.
 	* deb-0.1.23.5
+	* compression level always -9 (both lib lzma and command xz)
+	* deb-0.1.23.7
 
  -- mempo <mempo@mempo.org>  Tue, 06 Jan 2014 11:30:00 +0200
 
