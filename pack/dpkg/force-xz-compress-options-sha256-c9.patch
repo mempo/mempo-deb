@@ -1,6 +1,6 @@
 diff -Nuar a/lib/dpkg/compress.c b/lib/dpkg/compress.c
 --- a/lib/dpkg/compress.c	2014-02-06 08:21:34.424608732 +0100
-+++ b/lib/dpkg/compress.c	2014-02-06 15:43:53.180517683 +0100
++++ b/lib/dpkg/compress.c	2014-02-07 08:11:52.780314304 +0100
 @@ -531,10 +531,11 @@
  
  	io->status |= DPKG_STREAM_COMPRESS;
@@ -15,26 +15,27 @@ diff -Nuar a/lib/dpkg/compress.c b/lib/dpkg/compress.c
  	if (ret != LZMA_OK)
  		filter_lzma_error(io, ret);
  }
-@@ -595,7 +596,7 @@
+@@ -595,7 +596,8 @@
  static void
  compress_xz(int fd_in, int fd_out, struct compress_params *params, const char *desc)
  {
 -	char combuf[6];
 +	char combuf[64];
-+ const char *check = "--check=sha256";
++	const char *check = "--check=sha256";
  	const char *strategy;
  
  	if (params->strategy == compressor_strategy_extreme)
-@@ -603,7 +604,7 @@
+@@ -603,15 +605,15 @@
  	else
  		strategy = NULL;
  
 -	snprintf(combuf, sizeof(combuf), "-c%d", params->level);
+-	fd_fd_filter(fd_in, fd_out, desc, env_xz, XZ, combuf, strategy, NULL);
 +	snprintf(combuf, sizeof(combuf), "-c9");
- 	fd_fd_filter(fd_in, fd_out, desc, env_xz, XZ, combuf, strategy, check, NULL);
++	fd_fd_filter(fd_in, fd_out, desc, env_xz, XZ, combuf, strategy, check, NULL);
  }
  #endif
-@@ -611,7 +612,7 @@
+ 
  static const struct compressor compressor_xz = {
  	.name = "xz",
  	.extension = ".xz",
