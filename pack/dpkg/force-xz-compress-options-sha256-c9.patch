@@ -32,7 +32,7 @@ diff -Nuar a/lib/dpkg/compress.c b/lib/dpkg/compress.c
 -	snprintf(combuf, sizeof(combuf), "-c%d", params->level);
 -	fd_fd_filter(fd_in, fd_out, desc, env_xz, XZ, combuf, strategy, NULL);
 +	snprintf(combuf, sizeof(combuf), "-c9");
-+	fd_fd_filter(fd_in, fd_out, desc, env_xz, XZ, combuf, strategy, check, NULL);
++	fd_fd_filter(fd_in, fd_out, desc, env_xz, XZ, combuf, check, strategy, NULL);
  }
  #endif
  
