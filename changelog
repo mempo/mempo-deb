@@ -6,6 +6,9 @@ mempo-deb (0.1.24) UNRELEASED; urgency=low
   * deb-0.1.24.2
 	* fix the patch format
 	* deb-0.1.24.3
+	* really fix the patch format (one of args could terminate arg list)
+	* changed tags numbering
+	* 0.1.24.5
 
  -- mempo <mempo@mempo.org>  Tue, 06 Jan 2014 11:30:00 +0200
 	
