@@ -10,6 +10,7 @@ mempo-deb (0.1.24) UNRELEASED; urgency=low
   * changed tags numbering
   * 0.1.24.5
   * docs
+  * compression level for all compressors set always to -9 (gz, bz, xz)
   * 0.1.24.6
 
  -- mempo <mempo@mempo.org>  Tue, 06 Jan 2014 11:30:00 +0200

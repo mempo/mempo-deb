@@ -1,0 +1,78 @@
+diff -Nuar a/lib/dpkg/compress.c b/lib/dpkg/compress.c
+--- a/lib/dpkg/compress.c	2014-03-07 12:33:07.635960666 +0100
++++ b/lib/dpkg/compress.c	2014-03-07 13:04:52.703954130 +0100
+@@ -200,7 +200,7 @@
+ 	else
+ 		strategy = ' ';
+ 
+-	snprintf(combuf, sizeof(combuf), "w%d%c", params->level, strategy);
++	snprintf(combuf, sizeof(combuf), "w9%c", strategy);
+ 	gzfile = gzdopen(fd_out, combuf);
+ 	if (gzfile == NULL)
+ 		ohshit(_("%s: error binding output to gzip stream"), desc);
+@@ -250,7 +250,7 @@
+ {
+ 	char combuf[6];
+ 
+-	snprintf(combuf, sizeof(combuf), "-c%d", params->level);
++	snprintf(combuf, sizeof(combuf), "-c9");
+ 	fd_fd_filter(fd_in, fd_out, desc, env_gzip, GZIP, "-n", combuf, NULL);
+ }
+ #endif
+@@ -321,7 +321,7 @@
+ 	int bz_errnum;
+ 	BZFILE *bzfile;
+ 
+-	snprintf(combuf, sizeof(combuf), "w%d", params->level);
++	snprintf(combuf, sizeof(combuf), "w9");
+ 	bzfile = BZ2_bzdopen(fd_out, combuf);
+ 	if (bzfile == NULL)
+ 		ohshit(_("%s: error binding output to bzip2 stream"), desc);
+@@ -376,7 +376,7 @@
+ {
+ 	char combuf[6];
+ 
+-	snprintf(combuf, sizeof(combuf), "-c%d", params->level);
++	snprintf(combuf, sizeof(combuf), "-c9");
+ 	fd_fd_filter(fd_in, fd_out, desc, env_bzip2, BZIP2, combuf, NULL);
+ }
+ #endif
+@@ -531,10 +531,10 @@
+ 
+ 	io->status |= DPKG_STREAM_COMPRESS;
+ 
+-	preset = io->params->level;
++	preset = 9;
+ 	if (io->params->strategy == compressor_strategy_extreme)
+ 		preset |= LZMA_PRESET_EXTREME;
+-	ret = lzma_easy_encoder(s, preset, LZMA_CHECK_CRC32);
++	ret = lzma_easy_encoder(s, preset, LZMA_CHECK_SHA256);
+ 	if (ret != LZMA_OK)
+ 		filter_lzma_error(io, ret);
+ }
+@@ -597,21 +597,21 @@
+ {
+ 	char combuf[6];
+ 	const char *strategy;
+-
++	const char *check = "--check=sha256";
+ 	if (params->strategy == compressor_strategy_extreme)
+ 		strategy = "-e";
+ 	else
+ 		strategy = NULL;
+ 
+-	snprintf(combuf, sizeof(combuf), "-c%d", params->level);
+-	fd_fd_filter(fd_in, fd_out, desc, env_xz, XZ, combuf, strategy, NULL);
++	snprintf(combuf, sizeof(combuf), "-c9");
++	fd_fd_filter(fd_in, fd_out, desc, env_xz, XZ, combuf, check, strategy, NULL);
+ }
+ #endif
+ 
+ static const struct compressor compressor_xz = {
+ 	.name = "xz",
+ 	.extension = ".xz",
+-	.default_level = 6,
++	.default_level = 9,
+ 	.fixup_params = fixup_none_params,
+ 	.compress = compress_xz,
+ 	.decompress = decompress_xz,
