@@ -42,7 +42,7 @@ function show_mempo_contact {
 
 echo " * Dpkg version is $DPKG_VER (version >= $DPKG_VER_NEEDED is recommended)"
 
-if [[ 2>3 ]] ; 
+if [[ 2 > 3 ]] ; 
 then
 	. dpkg-vercomp.sh
 	vercomp $DPKG_VER $DPKG_VER_NEEDED
