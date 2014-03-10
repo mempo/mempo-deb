@@ -42,20 +42,25 @@ function show_mempo_contact {
 
 echo " * Dpkg version is $DPKG_VER (version >= $DPKG_VER_NEEDED is recommended)"
 
-. dpkg-vercomp.sh
-vercomp $DPKG_VER $DPKG_VER_NEEDED
-case $? in
-        2)
-        echo "Wrong DPKG version..." ;
-        echo "If you want to force and try despite this problem, edit this script that shows this error."
-        show_dpkg_why
-        show_mempo_contact
-        echo
-        echo "On Debian (wheezy) the SOLUTION is to install dpkg in version from jessy (download sources, build only this one package, install it), search for more info on our Wiki."
-        echo
-        exit 1
-        ;;
-esac
+if [[ 0 ]] ; 
+then
+	. dpkg-vercomp.sh
+	vercomp $DPKG_VER $DPKG_VER_NEEDED
+	case $? in
+					2)
+					echo "Wrong DPKG version..." ;
+					echo "If you want to force and try despite this problem, edit this script that shows this error."
+					show_dpkg_why
+					show_mempo_contact
+					echo
+					echo "On Debian (wheezy) the SOLUTION is to install dpkg in version from jessy (download sources, build only this one package, install it), search for more info on our Wiki."
+					echo
+					exit 1
+					;;
+	esac
+else
+	echo "Skipping check of dpkg version."
+fi
 
 base_dir="$(pwd)" ; [ -z "$base_dir" ] && die "Could not get pwd ($base_dir)" # basic pwd (where our files are)
 # echo "Our base_dir is $base_dir [PRIVACY]"  # do not print this because it shows user data
@@ -91,11 +96,15 @@ then
   sha512sum *.gz
   sha512sum *.dsc
   echo "Does above checksums of the SOURCE file look correct? Press Ctrl-C to cancel or ENTER to conitnue"
+	echo "(Verify this checksums from external trusted source, although this files ARE EMBBED in the code download, e.g. should be embbed in git clone / git exported bundle here in OFFLINE mode, so should be fine if you trust this script)"
   read _
   dpkg-source -x *.dsc
 else
-  echo "Downloading sources using apt-get source"
+  echo "Downloading sources using apt-get source (from network)"
+	set -x
   apt-get source gnupg || die "Can not download the sources" # <--- download
+	set +x
+	echo "This download should be secured thanks to apt-get security"
 fi
 
 
