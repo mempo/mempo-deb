@@ -1,0 +1,219 @@
+software=mempo/mempo-deb/pack/gnupg
+sources-url=https://github.com/mempo/mempo-deb/
+sources-sha1=7656c7732052a3cf7e1b4db70b40143dd0e45b2b
+sources-tag=none
+sources-sign-by-fpr=none
+my-name-or-pseudonym=rfree
+my-code-review=3
+my-checksum=63a0f8837815662bbabebd895257645f61bc0bc9  gnupg-curl_1.4.12-7+mempo1.0_amd64.deb
+my-checksum=4251f1389a0ce00b4045749346564c1192b4c4cd  gnupg_1.4.12-7+mempo1.0_amd64.deb
+my-checksum=5a611e9a5bf4fa97c33373dfc0e1eb4d57761284  gpgv_1.4.12-7+mempo1.0_amd64.deb
+my-computer-system=tesla
+my-computer-kernel=3.2.55-grsec-mempo.good.0.1.28
+my-computer-arch=86_64
+my-computer-type=intel
+my-computer-trust=90
+my-tools-sha1-mempo-deb-dpkg=1.16.12 from normal debian repository
+[details]
+<human>
+<cannary>I hereby freely say that up till day of writting this text (Tue Mar 11 15:03:34 CET 2014)
+I was not, and I do not suspect to be in foreseeable future, under ANY form of NDA or gag order 
+(nor ANY influence) that could in any way affect this verification testimony. (I am in law jurisdiction: <j>Poland, dependency of EU</j>).</cannary>
+
+<remarks>Check the files inside .deb, because the deb themselves are probably not deterministic yet</remarks>
+
+I, rfree (known from/related to project: mempo, freenet, opentransactions) can confirm, 
+that I downloaded the source code with git sha1 sum as in line sources-sha1= above, and I built it 
+on my system as described above, and that these sources did in fact produced the files with checksums as listed above in my-checksum= lines, 
+and that the said build was done under following conditions:
+* value of line my-computer-trust= means security of computer used by me for this: 0-50 is regular, 
+  50-100 is hardened, 100-200 is +always airgap, 200-300 is +openhardware computer, best self-build
+* value of my-code-review= means how I reviewed the primary source code 
+  (the sources that have checksum sources-sha1=) as follows:
+  0=no check; 2=glanced over the code; 4=reviewed by comparing to previously
+  reviewed versions; 8=reviewed from scratch. 10=did deep review.
+  (for all this values, the review applies to files as downloaded from git, 
+  with EXCLUSION of large external code blobs, e.g. the dpkg source code as downloaded from their sources server).
+  WARNING: all extra code (e.g. downloaded by running this script) should be 
+  checksummed on download by primary source code, otherwise the compilation
+  outcome is not guaranteed to be meaningful.
+* my-tools-sha1... list sha1sums (e.g. git name) of other sources that I build in order to build this code (e.g. the mempo-deb dpkg).
+
+<comment>
+dpkg-genchanges: binary-only upload - not including any source code
+ dpkg-source --after-build gnupg-1.4.12
+dpkg-buildpackage: binary only upload (no source included)
+Differences:
+
+(there were no differences shown)
+
+kernelbuild@tesla:~/mempo-deb/pack/gnupg$ sha256sum `find /tmp/build-ZZZZZZ-gnupg/ | egrep '\.deb$'`
+637eca5c11dd0317583609f25081e77b9df3a03a535f0ab1993e9e18940ab3b3  /tmp/build-ZZZZZZ-gnupg/build/gnupg-curl_1.4.12-7+mempo1.0_amd64.deb
+baff2a99a9b9d3179eb5656370bc6e1675621ee45e669cb9d53ecf0cda0d330d  /tmp/build-ZZZZZZ-gnupg/build/gnupg_1.4.12-7+mempo1.0_amd64.deb
+af37325a36c4c21b1a57c304a17b96669db4dc6d2b1d4baa4f1475c7ba6f154b  /tmp/build-ZZZZZZ-gnupg/build/gpgv_1.4.12-7+mempo1.0_amd64.deb
+
+sha1sum `find /tmp/build-ZZZZZZ-gnupg/ | egrep '\.deb$'`
+63a0f8837815662bbabebd895257645f61bc0bc9  /tmp/build-ZZZZZZ-gnupg/build/gnupg-curl_1.4.12-7+mempo1.0_amd64.deb
+4251f1389a0ce00b4045749346564c1192b4c4cd  /tmp/build-ZZZZZZ-gnupg/build/gnupg_1.4.12-7+mempo1.0_amd64.deb
+5a611e9a5bf4fa97c33373dfc0e1eb4d57761284  /tmp/build-ZZZZZZ-gnupg/build/gpgv_1.4.12-7+mempo1.0_amd64.deb
+
+</comment>
+
+</human>
+
+<checksum type="sha1" on="unpacked">
+0d5f1556f335467bb360dc7cea98f130e80e9edc  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/id/LC_MESSAGES/gnupg.mo
+1248ee77a71ae965e700ff0353bb693c02d430c7  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gnupg/changelog.gz
+1248ee77a71ae965e700ff0353bb693c02d430c7  gnupg-curl_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gnupg-curl/changelog.gz
+1248ee77a71ae965e700ff0353bb693c02d430c7  gpgv_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gpgv/changelog.gz
+1469ce1454413ee2d6e2ff111ca9fc67c2ddf6dd  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/man/man7/gnupg.7.gz
+17bb429a909723209bfeaace1662c47a00f6bd23  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/be/LC_MESSAGES/gnupg.mo
+17c27e2e97ce4e41f9ec521e5b58ba024b792919  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/bug/gnupg/presubj
+1cc594771881867c95b6164a53b8ba1d172ea15e  gnupg-curl_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/lib/gnupg/gpgkeys_curl
+227e358c898bc600980f903974125bbc2c97285b  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/en@boldquot/LC_MESSAGES/gnupg.mo
+254d5e79fe98854fbdc73849d5b55a4a903e0ec4  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/cs/LC_MESSAGES/gnupg.mo
+25bff0381c6c0d62fd8a6b1065a53619b3a12952  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/hu/LC_MESSAGES/gnupg.mo
+28a927c2e8dca5f7286ad3f8ddb88de5e6937878  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gnupg/OpenPGP.gz
+32064c1cbc763f07ad4e06788dd7d5c179ea1924  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/sv/LC_MESSAGES/gnupg.mo
+34ce6802cf1844fde063140083eba811dac25bf9  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/zh_CN/LC_MESSAGES/gnupg.mo
+3552f8b8a541c228e75419ef74a85935cf73e15b  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/man/man1/gpg-zip.1.gz
+39b5e0ba1c50cc9790e73383327e01e18c27fb60  gpgv_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/bin/gpgv
+3dc6eec2bf46249a2f55d9819aba1759be7dfc2e  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/lib/gnupg/gpgkeys_finger
+430c109a718e787ec864ebbbb1a5585bbdb31090  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gnupg/copyright
+430c109a718e787ec864ebbbb1a5585bbdb31090  gnupg-curl_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gnupg-curl/copyright
+430c109a718e787ec864ebbbb1a5585bbdb31090  gpgv_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gpgv/copyright
+51166d91ee6061df075fd6d8cf6e6a928d281401  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/et/LC_MESSAGES/gnupg.mo
+522699f54e8e66707022df68ec27b3cf621d2192  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gnupg/changelog.Debian.gz
+522699f54e8e66707022df68ec27b3cf621d2192  gnupg-curl_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gnupg-curl/changelog.Debian.gz
+522699f54e8e66707022df68ec27b3cf621d2192  gpgv_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gpgv/changelog.Debian.gz
+57a4a79b7178585116ea7a196cfd831fddbd901c  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/ja/LC_MESSAGES/gnupg.mo
+5b40878adf3672026b61ff93c220c36eda212af1  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gnupg/README.Debian
+5d3ec34afc1f8611440a57db8ba7e77dd00c927c  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/nl/LC_MESSAGES/gnupg.mo
+5dab13a5129e3d9bb2eb0d0848aaf3b8394671d1  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/gnupg/options.skel
+5f093ed97b633b5b4183de5b78b492a7a36b2760  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/zh_TW/LC_MESSAGES/gnupg.mo
+656441be03aa7a6ce5d143202a57246e890d0e50  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gnupg/README.gz
+673dcfe41e11864ad2d8142981786ef3ef2a3cd8  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/el/LC_MESSAGES/gnupg.mo
+6c0de7b9b0e03053f797d8ac0ae09b1e63fcec9c  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/lib/gnupg/gpgkeys_curl
+793377b7bba1a501319b1d7448e5945d0fc34fd5  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/fi/LC_MESSAGES/gnupg.mo
+7b7e3bd9defb093333e1d4cbb172453205a8d5c3  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gnupg/FAQ
+7fc1560be1c7c4043edd48bba77f95fa5826eba6  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/pt_BR/LC_MESSAGES/gnupg.mo
+80e9e742c0e3f9bacd031462408712bb783f80c8  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/es/LC_MESSAGES/gnupg.mo
+81badc0553698586f453bac30e30996cf2c600ca  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/nb/LC_MESSAGES/gnupg.mo
+89406dffd69c005529cdeaf97a79271accfe5a36  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/lib/gnupg/gpgkeys_hkp
+8a9db6e20190556acd998850af76d7e97106f2c6  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/en@quot/LC_MESSAGES/gnupg.mo
+8af16a880abdb3cab62070ea3e4941db9a5e05fc  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/pl/LC_MESSAGES/gnupg.mo
+8c2c6c6c046c2440fcdce9e8dc8d2fe4ff7b9da0  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/tr/LC_MESSAGES/gnupg.mo
+8ecf1a6464f90b5db8c27097800be2614475456e  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/man/man1/gpgsplit.1.gz
+98a537a7025f5e1381765c74680058df827cb0be  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gnupg/README.BUGS.Debian.gz
+98f130c0a6d94214d9241d53de371f0dcff0e0d3  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gnupg/Upgrading_From_PGP.txt
+999197da801b1696a48c93f00bca97746b01cc66  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/bin/gpg
+9ff4c9d607c9ae2ec0ac2c6db34e4e89ba316f81  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/info/gnupg1.info.gz
+a246478f815b9441da95bcef4c5bfe8d1ff815b8  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/gl/LC_MESSAGES/gnupg.mo
+a3c4cba3822a9a4ddf23795518807fe78fc96a39  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/ca/LC_MESSAGES/gnupg.mo
+ad1e2b15ee6c564fba741071a9373f74910e54d5  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/lib/gnupg/gpgkeys_mailto
+adcd34bbadf2b587259fadd0ce7d93da1d9e0d54  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/man/man1/lspgpot.1.gz
+b09c35fdac80bbfb1e801934e8feace40c1ddaa7  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/de/LC_MESSAGES/gnupg.mo
+b85fb30797b4de95989d09611af7b183fa760fa7  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gnupg/THANKS.gz
+be97a70a7e30c9e5344ab2cffb04a79601bb5ff0  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/lib/udev/rules.d/60-gnupg.rules
+beda91cd61d3421355d22f1effa172a012e6b55f  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/man/man1/gpg.1.gz
+bf21f72561f48b4ffe0846e0aec3da02b22db343  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/pt/LC_MESSAGES/gnupg.mo
+c317220aea561c1ac7dd5168440b5327b3586d7d  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gnupg/examples/convert-from-106
+c91779bc255fab3804011a5c62d0842ee446c671  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/lib/gnupg/gpgkeys_ldap
+c918d190a867c5ce9433974a2faa4df9dc8af290  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/ro/LC_MESSAGES/gnupg.mo
+c983c6d992b4a46989f3ef8bd4cbc932ab56beae  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/sk/LC_MESSAGES/gnupg.mo
+c9bebb383ecb8126fea4b2b69b20608e311b582d  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/man/ru/man1/gpg.1.gz
+cd1ac5a767b303a6c5271945936f54bc9d537bcd  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gnupg/TODO
+d01abb27b52cd2a523dbfae1150fd18dfc79110e  gnupg-curl_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/lib/gnupg/gpgkeys_hkp
+d1bd302f7310b06b225e5ee52eb22a0b211c7413  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/ru/LC_MESSAGES/gnupg.mo
+d21852c6baa0ead286f0f5d256ef23d5fc1601cc  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/da/LC_MESSAGES/gnupg.mo
+d3c28e149da4e7d9493aee5ddaa99dbe5847179e  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/bin/gpg-zip
+d704fe0174461ed7d6578d23f3d7534ec77d4b3b  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/uk/LC_MESSAGES/gnupg.mo
+da8eda208f163a0efbc438dd103c0724ea1d625c  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/bin/lspgpot
+dde143c14e8e6e3aa485c2192cd3c986dd98fbfe  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/it/LC_MESSAGES/gnupg.mo
+e737d5fe76eb692d715b4a5692d73b9085284847  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/bin/gpgsplit
+ed08b9e75b80b008773170cd00f0b8b084c94722  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gnupg/TODO.Debian
+ed29b979f7104260f93274a4c10defbace2becfa  gpgv_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/man/man1/gpgv.1.gz
+f528e6ba01a7558225b0396fc08f5a41a0223f8d  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/eo/LC_MESSAGES/gnupg.mo
+f70de1c341687d1d1b07e98f59767a747e764d8a  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gnupg/highlights-1.4.txt.gz
+f7153fd81197c9094bbf1e6f35491a8aa65d5324  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/fr/LC_MESSAGES/gnupg.mo
+f76f1526a610dd2768b024f26a79fdd231ffbb22  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gnupg/DETAILS.gz
+</checksum>
+
+<checksum type="whirlpool" on="unpacked">
+08b3e862d3589dfeefc9c495894219bfbc4621f7212a7c6e531168c88ed95bb5b54b85faaded1ccfa378e97a5a4e339be7a2fbf41c2a2baa808db08c48b916af  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gnupg/README.BUGS.Debian.gz
+0927d3c4f47e266d62da6b4455438d12893ab3dfbfc2561497a97398222cd55d4914ea375bce0480275d427ec5c9982ab5c07bc0a5e2bf6113bf39cff7bdd329  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/fr/LC_MESSAGES/gnupg.mo
+09dc518cb87cc1920cbe9e775da9721a14b029b63584c1744d81d171c62836d76b3a7d4c8f14f45c04592cd3ba5dab719b5a8d1050815fb38c5bdc2d6cc10aed  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/el/LC_MESSAGES/gnupg.mo
+0d3439b77b8fb805963d9ddb0226b8fe7245ec8bb44655565de68a170d3b78a7cc6f5cef36a04655b501764caeffd2f0bd597177759c8682890e8b70024d820f  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/man/man1/gpg.1.gz
+11bbf923a4078c23c29d8691830d99fd993d83712361e001ee1124ac030c9765f7eb503c8c910a80c154d3846adcdd780e6c03e3894dff05567303854da80f64  gpgv_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/man/man1/gpgv.1.gz
+1274450de16919fd03af63d69b07efaf8cf61b5f97f7c32eb44a3ead6c7fe75b9305bbace8087cd77a1043323df372b6d57d1061179c159eaa6a3b062067746a  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/tr/LC_MESSAGES/gnupg.mo
+135ebe1488cfd0695971985f74b6e04c460fe71b6993c0fa3bd2246f5ee465ab291d64b33770ff0edf32eac65001ea4e7446252ade8ebdf2428f23b95f5756de  gnupg-curl_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/lib/gnupg/gpgkeys_curl
+1702bfa998dc6b228dbfb891de61915d8a57731567e4e24cf9a8471c35d6bfef0d6d9acaa6283c43ae1fb2387d0c429ea4c472a1e730231080616775f50bf848  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/man/man7/gnupg.7.gz
+18dac3c669c9c2b19fe38626dcc2ae041ce30ed8f0c76afb310d2c1c60c5a36afc13b6b13208049af69b44f782bbbb95f13da143ea972817afddc85ad35d0480  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/ro/LC_MESSAGES/gnupg.mo
+1ad59c5a1ee1941ab3ba2e796215b8976770df93161fac1f212a32c3439089ff2159f422c8807586e0ea418cf59fa2905d2891102c9349e5f218dd10034d844a  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/ca/LC_MESSAGES/gnupg.mo
+1bf3e8637a17df930acde4848b9794dbb1d300ed3815ca0ab3ee036a7fa1365ef0e6aa9455f135e6b5906e317918349c3dc437e401c585d509e36f455a31a769  gnupg-curl_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/lib/gnupg/gpgkeys_hkp
+1cb7924e2e7906c1013604e32fb5d51e3c1625290a6797e57e60e376482fcf4885fb2313cdcc223e2b2dd9ecdd4db056e2428138c47b99666803115a31689e3c  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/lib/gnupg/gpgkeys_mailto
+24bb50b963222fa117dd06c7fad0c7b1d33355bb7d93362899ffcba431711f36d3cc83987b8fe194cf214bd6c2121655d2fd274ce5edde793e478dd31e624d40  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/man/man1/gpg-zip.1.gz
+251c2c3145677e2e8f4925bdf00391b18e73ce6fdae0239f6f7be236a494374f5fd5a0d22f2b70770c9742ab029c3a57095791793a5ded3063d39c50c317b650  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/zh_CN/LC_MESSAGES/gnupg.mo
+2b32b27c2004e6ca77786eea36143e9a85d3e6c6fd794e32750af09015989e35c9cebeda89ceddc9a2a4e717d7685cd31f579dd674e15f6a0751ed0b48bf2603  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/gnupg/options.skel
+2c428796c988c37e6cf1f2398561a776c1b5e334c7d58fff531eff6e260aaa2edaa00dfa21f6c640896b48b6af8a87e9e3d3b40260bd0375ddcac8c99fa18b5a  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gnupg/THANKS.gz
+33488699626aca29a3a4be2f5569b9cb581dc221d3c38d74a1b0a5a7420b4ffb62619b1a4b4019f65996c0bb952e4d2789b044afda65373f099cb9528b228301  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gnupg/highlights-1.4.txt.gz
+34d27f0a06069b856561c2ebe1ebceff9f426d006a3392499eabcefa8a3e5f9b03b50944f4ca7611d05c26ccf84a3a89163e682332045d59b0a3fb8e6d819038  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gnupg/changelog.gz
+34d27f0a06069b856561c2ebe1ebceff9f426d006a3392499eabcefa8a3e5f9b03b50944f4ca7611d05c26ccf84a3a89163e682332045d59b0a3fb8e6d819038  gnupg-curl_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gnupg-curl/changelog.gz
+34d27f0a06069b856561c2ebe1ebceff9f426d006a3392499eabcefa8a3e5f9b03b50944f4ca7611d05c26ccf84a3a89163e682332045d59b0a3fb8e6d819038  gpgv_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gpgv/changelog.gz
+37a638de26175a32c4741b659464e48adef5f6544654ac990d6f0e2be9b1c7c29b46ff001041fb52cf0f94a3a4b81ce75b2e571064d4113406160b8d5f80ab0b  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/bug/gnupg/presubj
+3dbd449825eb9f8655d2e588f12d5a976133a107ab18a03b7255b9f550cec71f2bb3166b517c9dbd7669337a1c2039615d47b7fd5aba7d3faf07a21bc2f9d015  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/fi/LC_MESSAGES/gnupg.mo
+3f2f2b26bc3cc761ceaf4889310efddb668d3e48615940ba5cbbf8028d1100b9200fed2c419869cb77ffaf534ca60fb7c7db8145f561541fd1574f57f8fc0fb5  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/de/LC_MESSAGES/gnupg.mo
+43926db91cc3822e3377189f5a184d86f9a45865e7bb6dad851f82fa024a4884f414038797b3cc75929a0108dc7e33406774005fa1d46dad0a06574cbe0d57c2  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/pt/LC_MESSAGES/gnupg.mo
+4868c8f6a6bc20c779a64e86bc6972c90cbdea8cafccf3c35f7fa0e32f9a0c71f199be2618d1355319847e5aba1263f63a0d90606396156b29898e0f6ff1672a  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gnupg/README.gz
+48c5166dae14c28a90399621a1e8ace5e90867901b6b6f1de8a96bd266838c5b975d9383c277ac90439e784bc891ee438463eeaba1ed4d8a00b03bd8a2e782dd  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/lib/gnupg/gpgkeys_curl
+4bd1ffacaafc80216489868fe35faa4de39fe860c2999bd2cbbc88eba7e990e6514a286c5aed2861156eccbaea55296958c91222a044850229ebeeeaf4a7ad8a  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/lib/gnupg/gpgkeys_hkp
+4e0442e5573c45fe1e08fb8cfc87c43e7d4085aac5bea34da27583e05eb02c18fb3cb88d0ae1927c97e825bf19ec734ce4ea407518794bedb8afc395582e11dc  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/man/man1/lspgpot.1.gz
+4e288104a1b8e6f4b75e2ad5509c1fe7d63f7b108f1d73438e2455c759471064dbb29d0b0ef24e23232d826ebd7bdaa405b68beccdba57a6be7c7409f3c7fc3a  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/en@boldquot/LC_MESSAGES/gnupg.mo
+514dd4584490ba576aa6ec0ff9529bb4305c25faa52dc8fc4821d21656b579d0c580828fe6920307a530e384d426b33c9559a35a621f8c4d4cc37b04d4acf873  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/ja/LC_MESSAGES/gnupg.mo
+55b040a18a4ffaf1dec74323499026f461151e11fe4c010551b46b3cc3907f6a312f9665f1b9b86c8940e0c4c57846168a6dac84cde9eb885d6e21a322d1f70f  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/gl/LC_MESSAGES/gnupg.mo
+56a2e27f755b574c5dba1fd6ea1a34c1c3de895a4f63e0d6fda723804a6dbce280cb2de98ca48ad8bfd72b77b8724336e7d294409058c70bd8f26db9156e8936  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/nb/LC_MESSAGES/gnupg.mo
+57962365eb823422ce515b8691ae3edd997acaf03e00e77b424a84e4806ff0fe778beef0aa47f90af067f219010dd9f43a2a740231467033f0821c18f52102bb  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/eo/LC_MESSAGES/gnupg.mo
+5f0430b28c1280b70bafe3d479cf4fe7639d12267a91bfff6f253b0f91fbc66d0619ca297b2e308fff9a974ea7156059b9c63bea245d093d199dbd0d4ff0718b  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/man/ru/man1/gpg.1.gz
+6779614d7a389017792430220cda6969b988e7ef7ff02b74f4c03b5556c029a34433ac13903be938a95478c29ae857f8b07e776009b761f9eb35ea4835d739d6  gpgv_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/bin/gpgv
+689588475fb213a57fc0f24fa20ed1ebb88bfebc7a6ab8aa0ce116999722e4f5d26b936e5d33543585426c15b2fb1bc41953e14c890d40fa88382524470d4d4a  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/bin/gpgsplit
+6a036688c8710f4f80f22c6d8e4ede3acfe07fa52537490b4977f747f38214447ab92f76b1024aeceab8cacac807d8e4e6419fc80c8a7a6a2d3b446896958976  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/lib/gnupg/gpgkeys_finger
+705d85f32fb8f26eed201bbcc054850a56695e23ab315a6837a5ff4c272cfe69e73fa856adc193218dda722ed8c0bf400c44c346a4ac378e3ebfe50b88037926  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/et/LC_MESSAGES/gnupg.mo
+71a5d8fcba2108d6a629cc8342b826135ffe145855446fe98e7fc2fdbc2a259f89faace7f049bc2c79f4e9f27db32e8aeffa0394b3fa86964eb1a8ca4c8a578a  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/zh_TW/LC_MESSAGES/gnupg.mo
+7f9ba0abf0101bc27a65389a8f56faee94fc831de1b1edd4bbc600d586064fb4920b2f029a160516682bb44d893438646c7d0a3f72addea83cbb27f445317278  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/lib/udev/rules.d/60-gnupg.rules
+8330c357c8c5a7c71f2e230664c83f3734189f15649e0c948e57f9e499c7dcd00cca79922fa51970875bbbcfd34a104d03f8de8a66b5f91e7c8bff2484ac3ce7  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/cs/LC_MESSAGES/gnupg.mo
+83ae20283042cf1e83f92eea690e3a4795b36ab1a481f35dd3c9850c5de1ad02d865ec5f198f4b6d9aa4cfada19edc74dc345315528b38a4b6c2f45ebb4490d2  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/bin/gpg
+8a79b3aead17843f44ee5a509f81a6544f6cbdf5feb167a54d70ad1ac44bea9848190b9f6be4c4e6346778f3d86db0de8d6ffbd72c7d924d66138b0928a1f77f  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gnupg/OpenPGP.gz
+8bef484ab7abe63de65fd934690d4bc4f7e4cebcc7d853366e6846091542c2e36af7ba186b8df664099424163293504237c604422220da496672a25b2056a495  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/bin/gpg-zip
+8d953eb7acf2712eaa817bf46fda1371f6074f47df8dd4f844a110e708805f4e30d8ed29fbad391fb13f308d3da7857baf652979057c338eab5e485d61a385fa  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/pl/LC_MESSAGES/gnupg.mo
+9acdb3bc4eead177370c813d40a984fcfdf8b02c7e228002d15850b86c04c02232abc07b415236bde818e56cc9dc4e212af7e3369902436bc4463308f66f241a  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/ru/LC_MESSAGES/gnupg.mo
+9d79983abef66c2edea9275ee32978c38bfa46d458caa0854128094c04f30a624c17452e7d908ee505758dce4cbaaa34d725e1988af228f14cef7c972a9199d8  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/info/gnupg1.info.gz
+9df7140db40f73c12a511cb945e8fef4906642fb45dc3ad2f79ad91cfbfdac5c4f5c8e62489eaf4efa7a23cda6ad5cca13eb80986441425982ae0a04cb483e28  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/man/man1/gpgsplit.1.gz
+9ed0d81578131badfd6a3c15b0c82ce38c71da40c1b69491b79de0425d340aede9996501268a74a6920025c9014766363224ea42a7f04f8f279bf65ae63f7e81  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gnupg/copyright
+9ed0d81578131badfd6a3c15b0c82ce38c71da40c1b69491b79de0425d340aede9996501268a74a6920025c9014766363224ea42a7f04f8f279bf65ae63f7e81  gnupg-curl_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gnupg-curl/copyright
+9ed0d81578131badfd6a3c15b0c82ce38c71da40c1b69491b79de0425d340aede9996501268a74a6920025c9014766363224ea42a7f04f8f279bf65ae63f7e81  gpgv_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gpgv/copyright
+a98011a605f50b23ceea831b2433e7ea0943a1806b140ffeebda15c648b127eaca6ffe5f58a0bb8b54fdd1b6697d728ccf63ec5b088b76a9cebfe3869d7c77db  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gnupg/TODO.Debian
+af78ad76b7a2bc3bdd085a4bd9036d4ab21619fec00522b791b36131c7a8f551c86175a81d9015d448955f9b5661d5d5f8d879ee722874b7b1c190fcbc72a111  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/hu/LC_MESSAGES/gnupg.mo
+b0b815f2e27e5b1bbfc708b2a79041619df527fdf21ae91dbc186e1bffd3c87f1b19261997a5a937a806e2623cf378cdc94835d3f4a940a2508bca14b053f0d2  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gnupg/README.Debian
+b57b3bc0988a7e46a35849a53540b7d868fa9460ac342ecf71b6560cd49af7970c2179faa1f311f8314a28f84f0f989b807d9ac69ab8ca2dd29436506ec3ac75  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/es/LC_MESSAGES/gnupg.mo
+b7ae77689a1fa766a903f70cadd49462f5b8a21cc8d6b257211de6a8a03649d7ae584b125f035085476cb1b42dcbad1e06ba4ccb49702470c78202b3b5544ef5  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gnupg/Upgrading_From_PGP.txt
+c46a78b24b37e532302e748816ed0c48efcb759f5d91b67cd23657f4cf7acb9b91dd10d0ee70b64080bc141fe31aa3622d64c407f707e5cddc56f236e7da1ef5  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/id/LC_MESSAGES/gnupg.mo
+c5f9411324b144b21743f5b1dbec998da3d4a5f2aac6c6226743bbbc5145ea0a095e87b489d9c661c88bfeff6544ff9e20e555b24ddab6c57d1fae8844eb3081  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/en@quot/LC_MESSAGES/gnupg.mo
+c7f50b6fae9e50f278b5ca9221a5604c8db862fc47f47406e2c69d9a78ae3f8781b83679546ff8926d4e039dc50e6a0c3a31b9693b46eca067afcc44a4bcceba  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gnupg/FAQ
+cc51f743c46e758c13d611782e8334b212651f01b25102c71d6afdf7791bf48bdf5bb2f281095647fa1918fa4d2bf7170556706308874cccebbe30e98cca6595  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/bin/lspgpot
+cc55a8f977b4b3adef4ceca1b06fd57ae3274a19c7ebe4563a35dad3bf8edbda6042cee150fdfe06e5e6262714c6dcf59101c190bc31b8b79ebfad73050fca7c  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/nl/LC_MESSAGES/gnupg.mo
+ce43fddfb9a49ce14a786bed323159a69da2d8cc4c2dd5fe46d2ac61b7de7fef24aaaff2fbf701aa34995af8dafb73f20b9dd70010259fd32f6e4e4038538a38  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gnupg/DETAILS.gz
+ce6c6f7e885a22e8a9db0c35761fdff0df2c8e44b612072fcafdf783e8b0c8034d69752ac40f6348ed47db06ff27d2f3708129348ea29dbd9a4bb33d21adcc2d  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/it/LC_MESSAGES/gnupg.mo
+d1379c548198de507c5c1ac484a3b7059ec234c23eca0be0aecf751f78025985109ec30ce6bfc86ab45996874fc7cbcc94b84f7e5e4cb17ea40baed47e8a20a8  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/sk/LC_MESSAGES/gnupg.mo
+d3827dd327c0b6745c23365a8f9a79810b66e7c50448df148ab685a75ecaeca899a32d1126d4f3be879de97168aeb49989db82bd74bb294a2190a6f16b4b88c0  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/sv/LC_MESSAGES/gnupg.mo
+db32111478ef5c1a5d11a66d3d2ae77326e141d290fc6cdc77d035b058a75f1686ff52e7dc6b9f212c8b63caadfb7063cd6eab2f04d75b5d42625ba772d2567f  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gnupg/examples/convert-from-106
+deeb43f232f15e04a9595ef3d86a0a08702aaacdb91b3bbaa87ef9c58fb5bb6432365df347e2aa991199fd70c8818a653a9fb57e5c78a729eb0b89f484b948a8  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/lib/gnupg/gpgkeys_ldap
+eec880e3174a1503b98f8d5d53b465d76069de75cbcbe7c6fbf01ab8cd0ae95120876ee9a7f76131dd4d2290be0b1d3074b94103fe6e4aed8a98b795bc11d788  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/pt_BR/LC_MESSAGES/gnupg.mo
+f0a4294f7bf4184bb373e9fc60f546bcf7c6639429205a7f746bb58a583b4c973ba7981f241b43e87d91b14c9ab4624f9d5f350bfd8a2a29d465c898372f9dc0  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gnupg/changelog.Debian.gz
+f0a4294f7bf4184bb373e9fc60f546bcf7c6639429205a7f746bb58a583b4c973ba7981f241b43e87d91b14c9ab4624f9d5f350bfd8a2a29d465c898372f9dc0  gnupg-curl_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gnupg-curl/changelog.Debian.gz
+f0a4294f7bf4184bb373e9fc60f546bcf7c6639429205a7f746bb58a583b4c973ba7981f241b43e87d91b14c9ab4624f9d5f350bfd8a2a29d465c898372f9dc0  gpgv_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gpgv/changelog.Debian.gz
+f58654c9faed6ce455280015c23e0a1dc7513d8c5b018687650be2a7a1e4788850403edd0c0bf08bb3df7db595babcda0226da32da09c5201c57d231dc99a11e  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/be/LC_MESSAGES/gnupg.mo
+f5d850c8307b510ddb80d7aa924e50f019ec8f8cb470ab0e7aa3e971e7e32d3dccd3f9b9a0cd57894474f1a7689787eee44f3c80b100d799706dc55c1e2fbc78  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/da/LC_MESSAGES/gnupg.mo
+fcdf802aef4fbfb27d7845fa0c5ab858e81c5ec6f01e2ea219287e0e8e53f7c7c06ae6590bf383cf551b9e9e87df511cadf4ad6781abf780268b603967f7c46c  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/locale/uk/LC_MESSAGES/gnupg.mo
+fd407d0b82d83aa2b112d278a5c4061ee52d83da68f0825ea6346d3992ad15aa4bea8926cdb22ec65e1e6f463b0dcd8bb0722f488c02c22367fd1491f9b7e9fb  gnupg_1.4.12-7+mempo1.0_amd64.deb.unpack/usr/share/doc/gnupg/TODO
+</checksum>
+
