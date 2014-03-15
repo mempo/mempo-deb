@@ -1,0 +1,15 @@
+Patch by benbrown
+Checking if zlib library is installed
+===========================================================
+--- a/configure.ac	2014-03-12 11:14:48.026757951 +0000
++++ b/configure.ac	2014-03-12 17:25:29.107149601 +0000
+@@ -54,6 +54,9 @@
+ 
+ # Checks for libraries.
+ DPKG_LIB_ZLIB
++if test "x$ac_cv_header_zlib_h" = "xno"; then
++	AC_MSG_FAILURE([Cannot find zlib library])
++fi
+ DPKG_LIB_BZ2
+ DPKG_LIB_LZMA
+ DPKG_LIB_SELINUX

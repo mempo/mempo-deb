@@ -1,0 +1,9 @@
+--- a/gzip.c	2012-04-24 17:25:28.000000000 +0100
++++ b/gzip.c	2014-03-13 16:06:34.329073727 +0000
+@@ -520,6 +527,7 @@
+      */
+     if (no_time < 0) no_time = decompress;
+     if (no_name < 0) no_name = decompress;
++    no_time = 1;
+ 
+     file_count = argc - optind;

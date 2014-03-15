@@ -1,9 +1,9 @@
 #!/bin/bash
 
 # <mempo>
-# mempo-title: Add posiibility to set timestamp in ar deb archive
+# mempo-title: Remove timestamps from gz files
 # mempo-prio: 2
-# mempo-why: To make deterministic deb package possible
+# mempo-why: To make deterministic deb package possible where gzip is invoked
 # mempo-bugfix-deb:
 # </mempo>
 
@@ -29,14 +29,14 @@ die() {
 #~base_dir="$(pwd)" ; [ -z "$base_dir" ] && die "Could not get pwd ($base_dir)" # basic pwd (where our files are)
 # echo "Our base_dir is $base_dir [PRIVACY]"  # do not print this because it shows user data
 
-echo "This script will download, build and install locally ($HOME/.local) dpkg with Lunar's deterministic patches (http://bugs.debian.org/cgi-bin/bugreport.cgi?bug=719845#54)" ; echo
-echo "Please run as ROOT (if needed): apt-get install git build-dep gnupg; apt-get install devscripts autoconf automake flex" ; echo
+echo "This script will download, build and install locally ($HOME/.local) gzip with a patch to never set the MTIME bytes in the gzip header" ; echo
+echo "Please run as ROOT (if needed): apt-get install git build-dep gzip; apt-get install devscripts autoconf automake flex" ; echo
 echo ""
 
 gettext_ver=$( LC_ALL=C dpkg -s gettext | grep 'Version' | head -n 1 | sed -e "s/Version: \([^ ]*\).*/\1/" | cut -d'-' -f1 )
 echo " * gettext version=$gettext_ver"
 
-. dpkg-vercomp.sh 
+. ../dpkg/dpkg-vercomp.sh 
 
 ver_what='gettext'; ver_have=$gettext_ver ; ver_need="0.18.2"
 set +e ; vercomp $ver_have $ver_need ; err=$? ; set -e 
@@ -53,31 +53,26 @@ esac
 echo "ok"
 echo " * Using $ver_what version $ver_have >= $ver_need - OK"
 
-rm -rf dpkg
+rm -rf gzip
 
-git clone https://alioth.debian.org/anonscm/git/reproducible/dpkg.git || die "Can't clone dpkg repository"
-cd dpkg
+git clone git://git.gag.com/debian/gzip || die "Can't clone dpkg repository"
+cd gzip
 
-git checkout pu/reproducible_builds
-git checkout 9673d63303211fdefe650f2974d35d326929d0fd
+git checkout 01862fe8836ddda5a652180653abdaffa143f0c2
 echo "Checking repository reference number"
 gitver="$(git show-ref --hash --heads)" || die "Can't take repository reference number!"
 
-if [[ "$gitver" == "9673d63303211fdefe650f2974d35d326929d0fd" ]] ; then
+if [[ "$gitver" == "baf8c7dd1f7954fc9b8b19469f5c3ea5d27d6c85" ]] ; then
 echo "OK GIT VERSION: $gitver"
 else
 die "Github repository reference doesn't match!"
 fi 
 
-patch -p 0 < ../set-version-manually-because-no-tags.patch
-patch -p 1 < ../force-all-compressors-level-9-and-sha256-for-xz.patch
-patch -p 1 < ../check-if-zlib-is-installed.patch
-patch -p 1 < ../set-strategy-manually.patch
+patch -p 1 < ../remove-mtime-from-headers.patch
 
-autoreconf -f -i
 ./configure --prefix=$HOME/.local
 make
 make install
 
 echo "======================================="
-echo "dpkg build and installed in $HOME/.local"
+echo "gzip build and installed in $HOME/.local"

@@ -1,0 +1,11 @@
+--- a/lib/dpkg/compress.c	2014-03-14 11:18:05.212432937 +0000
++++ b/lib/dpkg/compress.c	2014-03-13 14:42:03.236831726 +0000
+@@ -201,7 +201,7 @@
+ 		strategy = ' ';
+ 
+ 	snprintf(combuf, sizeof(combuf), "w9%c", strategy);
+-	gzfile = gzdopen(fd_out, combuf);
++	gzfile = gzdopen(fd_out, "w9 ");
+ 	if (gzfile == NULL)
+ 		ohshit(_("%s: error binding output to gzip stream"), desc);
+ 
