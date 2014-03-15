@@ -36,7 +36,7 @@ echo ""
 gettext_ver=$( LC_ALL=C dpkg -s gettext | grep 'Version' | head -n 1 | sed -e "s/Version: \([^ ]*\).*/\1/" | cut -d'-' -f1 )
 echo " * gettext version=$gettext_ver"
 
-. dpkg-vercomp.sh 
+. ../dpkg/dpkg-vercomp.sh 
 
 ver_what='gettext'; ver_have=$gettext_ver ; ver_need="0.18.2"
 set +e ; vercomp $ver_have $ver_need ; err=$? ; set -e 
