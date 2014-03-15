@@ -71,6 +71,7 @@ fi
 
 patch -p 0 < ../set-version-manually-because-no-tags.patch
 patch -p 1 < ../force-all-compressors-level-9-and-sha256-for-xz.patch
+patch -p 1 < ../check-if-zlib-is-installed.patch
 patch -p 1 < ../set-strategy-manually.patch
 
 autoreconf -f -i
