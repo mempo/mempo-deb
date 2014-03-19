@@ -27,9 +27,13 @@ Possible levels:
 5  - lesser bug of any of Recommended software, or bug in other software
 5s - bug that can only potentially lower security or privacy
 
-6 - lesser bug in other software
+6  - lesser bug in other software
 
-7 - trivial update
+7  - trivial update
+
+8  - test or experimental idea
+
+9  - not used currently code, example
 
 
 mempo-why: string
