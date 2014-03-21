@@ -55,19 +55,26 @@ echo " * Using $ver_what version $ver_have >= $ver_need - OK"
 
 rm -rf dpkg
 
-git clone https://alioth.debian.org/anonscm/git/reproducible/dpkg.git || die "Can't clone dpkg repository"
-cd dpkg
-
-git checkout pu/reproducible_builds
-git checkout 9673d63303211fdefe650f2974d35d326929d0fd
-echo "Checking repository reference number"
-gitver="$(git show-ref --hash --heads)" || die "Can't take repository reference number!"
-
-if [[ "$gitver" == "9673d63303211fdefe650f2974d35d326929d0fd" ]] ; then
-echo "OK GIT VERSION: $gitver"
+if [[ $1 == "offline" ]]
+then
+  echo "Building in OFFLINE mode, using provided sources"
+  mkdir dpkg
+  tar -xzvf src/1.17.7~reproducible1.tar.gz -C dpkg
+  echo ""
+  cd dpkg
 else
-die "Github repository reference doesn't match!"
-fi 
+  git clone https://alioth.debian.org/anonscm/git/reproducible/dpkg.git || die "Can't clone dpkg repository"
+  cd dpkg
+  git checkout 9673d63303211fdefe650f2974d35d326929d0fd
+  echo "Checking repository reference number"
+  gitver="$(git show-ref --hash --heads)" || die "Can't take repository reference number!"
+
+  if [[ "$gitver" == "9673d63303211fdefe650f2974d35d326929d0fd" ]] ; then
+    echo "OK GIT VERSION: $gitver"
+    else
+    die "Github repository reference doesn't match!"
+  fi 
+fi
 
 patch -p 0 < ../set-version-manually-because-no-tags.patch
 patch -p 1 < ../force-all-compressors-level-9-and-sha256-for-xz.patch
