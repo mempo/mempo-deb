@@ -65,6 +65,7 @@ then
 else
   git clone https://alioth.debian.org/anonscm/git/reproducible/dpkg.git || die "Can't clone dpkg repository"
   cd dpkg
+  git checkout pu/reproducible_builds
   git checkout 9673d63303211fdefe650f2974d35d326929d0fd
   echo "Checking repository reference number"
   gitver="$(git show-ref --hash --heads)" || die "Can't take repository reference number!"
