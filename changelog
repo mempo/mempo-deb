@@ -12,13 +12,15 @@ mempo-deb (0.1.24) UNRELEASED; urgency=low
   * docs
   * compression level for all compressors set always to -9 (gz, bz, xz)
   * 0.1.24.6
-	* details (coding style)
-	* zlib only compression, same compression strategy
-	* added offline mode
-	* dpkg strategy
-	* require that zlib is installed
-	* (other changes? check gitlog)
-	* 0.1.24.9
+  * details (coding style)
+  * zlib only compression, same compression strategy
+  * added offline mode
+  * dpkg strategy
+  * require that zlib is installed
+  * (other changes? check gitlog)
+  * 0.1.24.9
+  * require gettext version 0.18.3 (this is the current one, to make sure everyone uses same dpkg+gettext)
+  * 0.1.24.10
 
  -- mempo <mempo@mempo.org>  Tue, 06 Jan 2014 11:30:00 +0200
 	

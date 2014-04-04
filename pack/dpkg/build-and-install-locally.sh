@@ -38,7 +38,7 @@ echo " * gettext version=$gettext_ver"
 
 . dpkg-vercomp.sh 
 
-ver_what='gettext'; ver_have=$gettext_ver ; ver_need="0.18.2"
+ver_what='gettext'; ver_have=$gettext_ver ; ver_need="0.18.3"
 set +e ; vercomp $ver_have $ver_need ; err=$? ; set -e 
 case $err in
   2) echo ; echo "ERROR: wrong version of $ver_what"
