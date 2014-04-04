@@ -55,6 +55,8 @@ echo " * Using $ver_what version $ver_have >= $ver_need - OK"
 
 rm -rf dpkg
 
+dpkg_pu_git_version="9673d63303211fdefe650f2974d35d326929d0fd" # the version to download
+
 if [[ $1 == "offline" ]]
 then
   echo "Building in OFFLINE mode, using provided sources"
@@ -65,16 +67,16 @@ then
 else
   git clone https://alioth.debian.org/anonscm/git/reproducible/dpkg.git || die "Can't clone dpkg repository"
   cd dpkg
-  git checkout pu/reproducible_builds
-  git checkout 9673d63303211fdefe650f2974d35d326929d0fd
+  git checkout pu/reproducible_builds || die "Can not checkout the branch we need"
+  git checkout $dpkg_pu_git_version || die "Can not checkout this git version that we need - $dpkg_pu_git_version"
   echo "Checking repository reference number"
   gitver="$(git show-ref --hash --heads)" || die "Can't take repository reference number!"
 
-  if [[ "$gitver" == "9673d63303211fdefe650f2974d35d326929d0fd" ]] ; then
+  if [[ "$gitver" == "$dpkg_pu_git_version" ]] ; then
     echo "OK GIT VERSION: $gitver"
     else
-    die "Github repository reference doesn't match!"
-  fi 
+    die "Github repository reference doesn't match! We got gitver=$gitver instead of expected dpkg_pu_git_version=$dpkg_pu_git_version"
+  fi
 fi
 
 patch -p 0 < ../set-version-manually-because-no-tags.patch
