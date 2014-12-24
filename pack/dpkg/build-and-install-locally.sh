@@ -70,7 +70,7 @@ else
   git checkout pu/reproducible_builds || die "Can not checkout the branch we need"
   git checkout $dpkg_pu_git_version || die "Can not checkout this git version that we need - $dpkg_pu_git_version"
   echo "Checking repository reference number"
-  gitver="$(git show-ref --hash --heads)" || die "Can't take repository reference number!"
+  gitver="$(git rev-parse --verify HEAD)" || die "Can't take repository reference number!"
 
   if [[ "$gitver" == "$dpkg_pu_git_version" ]] ; then
     echo "OK GIT VERSION: $gitver"
